@@ -39,7 +39,7 @@ const inferSocketBaseUrl = () => {
   if (explicitSocketUrl) return explicitSocketUrl;
 
   const apiUrl = trimTrailingSlash(import.meta.env.VITE_API_URL || '');
-  if (!apiUrl) return '';
+  if (!apiUrl) return 'https://science-bowl.onrender.com';
 
   // If API URL ends with /api, connect Socket.IO at the service root.
   return apiUrl.replace(/\/api$/i, '');

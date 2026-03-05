@@ -32,12 +32,12 @@ import axios from 'axios';
  * Example .env:
  *   VITE_API_URL=http://localhost:5000/api
  * 
- * Fallback to '/api' for production (Nginx proxies /api to backend)
+ * Fallback to Render backend API if env var is not set
  */
 const resolveApiUrl = () => {
   const configured = String(import.meta.env.VITE_API_URL || '').trim();
   if (configured) return configured.replace(/\/+$/, '');
-  return '/api';
+  return 'https://science-bowl.onrender.com/api';
 };
 
 const API_URL = resolveApiUrl();
