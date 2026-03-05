@@ -1,0 +1,66 @@
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background: linear-gradient(160deg, rgba(17, 30, 58, 0.9), rgba(10, 20, 40, 0.95));
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  background: rgba(14, 28, 53, 0.96);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.22);
+}
+
+.input.withIcon {
+  padding-left: 2.75rem;
+}
+
+.icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hasError .input {
+  border-color: var(--accent-rose);
+}
+
+.hasError .input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 101, 136, 0.24);
+}
+
+.error {
+  font-size: 0.75rem;
+  color: var(--accent-rose);
+}

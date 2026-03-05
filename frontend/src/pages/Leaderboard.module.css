@@ -1,0 +1,209 @@
+.leaderboard {
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  font-size: 1.85rem;
+}
+
+.header p {
+  margin-top: 0.28rem;
+  color: var(--text-secondary);
+}
+
+.metaBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: rgba(8, 16, 32, 0.84);
+  padding: 0.35rem 0.68rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.metaBadge strong {
+  color: var(--text-primary);
+}
+
+.tableCard {
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+}
+
+.loading {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(34, 211, 238, 0.18);
+  border-top-color: var(--accent-cyan);
+  border-radius: 999px;
+  animation: spin 1s linear infinite;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: 0.88rem 0.95rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table td {
+  padding: 0.75rem 0.95rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table tbody tr:hover {
+  background: rgba(34, 211, 238, 0.09);
+}
+
+.topRank {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.14), transparent 70%);
+}
+
+.rank {
+  width: 96px;
+}
+
+.rankBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 0.18rem 0.48rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: rgba(16, 30, 58, 0.9);
+  font-weight: 800;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.playerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.avatar {
+  width: 2.05rem;
+  height: 2.05rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(130deg, #0da9e3, #2df0a5);
+  color: #ecf6ff;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.playerInfo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.displayName {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.username {
+  color: var(--text-muted);
+  font-size: 0.73rem;
+}
+
+.rating {
+  font-family: var(--font-display);
+  font-size: 1.14rem;
+}
+
+.pagination {
+  padding: 0.8rem 0.9rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.pagination button {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: rgba(16, 30, 58, 0.9);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.36rem 0.62rem;
+}
+
+.pagination button:hover:not(:disabled) {
+  border-color: rgba(34, 211, 238, 0.45);
+  color: var(--text-primary);
+}
+
+.pagination button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .table th,
+  .table td {
+    padding: 0.6rem 0.55rem;
+  }
+
+  .metaBadge {
+    width: 100%;
+    justify-content: center;
+  }
+}

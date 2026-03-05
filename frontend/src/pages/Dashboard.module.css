@@ -1,0 +1,464 @@
+.dashboard {
+  animation: fadeIn 320ms ease-out;
+}
+
+.loading {
+  min-height: 52vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid rgba(34, 211, 238, 0.18);
+  border-top-color: var(--accent-cyan);
+  border-radius: 999px;
+  animation: spin 1s linear infinite;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.3rem 1.25rem;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--border-color);
+  background:
+    radial-gradient(620px circle at 0% 0%, rgba(34, 211, 238, 0.2), transparent 58%),
+    radial-gradient(480px circle at 100% 0%, rgba(45, 240, 165, 0.14), transparent 58%),
+    rgba(8, 16, 32, 0.84);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 1.4rem;
+}
+
+.greeting h1 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.username {
+  background: linear-gradient(130deg, #9bf2ff, #2df0a5, #9f7cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+  color: var(--text-secondary);
+}
+
+.statusLine {
+  margin-top: 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.quickActions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.statsSection {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.4rem;
+}
+
+.ratingCard {
+  background: linear-gradient(155deg, rgba(14, 27, 53, 0.92), rgba(10, 20, 40, 0.94));
+}
+
+.ratingContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ratingInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ratingLabel {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.ratingValue {
+  font-size: clamp(2.3rem, 3.8vw, 3.1rem);
+  line-height: 1;
+  font-family: var(--font-display);
+}
+
+.rankTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ratingChart {
+  opacity: 0.86;
+}
+
+.peakRating {
+  margin-top: 0.75rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+}
+
+.statCard {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: linear-gradient(155deg, rgba(14, 27, 53, 0.92), rgba(9, 17, 34, 0.94));
+}
+
+.statIcon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(34, 211, 238, 0.15);
+  color: #9bf2ff;
+  font-size: 1.08rem;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.statValue {
+  font-size: 1.34rem;
+  font-family: var(--font-display);
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mainContent {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.playSection,
+.recentSection {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-2xl);
+  background: rgba(8, 16, 32, 0.84);
+  box-shadow: var(--shadow-md);
+  padding: 1.05rem;
+}
+
+.playSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.playOptions {
+  display: flex;
+  gap: 0.72rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.playOption {
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  display: flex;
+}
+
+.playCard {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.3rem;
+  background: linear-gradient(160deg, rgba(16, 30, 58, 0.9), rgba(9, 17, 34, 0.94));
+  border-radius: var(--radius-xl);
+}
+
+.playCard h3 {
+  font-size: 0.96rem;
+  color: var(--text-primary);
+}
+
+.playCard p {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  flex: 1;
+}
+
+.playIcon {
+  width: 2.45rem;
+  height: 2.45rem;
+  border-radius: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ecf6ff;
+  box-shadow: 0 10px 20px rgba(1, 8, 24, 0.45);
+}
+
+.queueInfo,
+.aiLevels,
+.categoryCount {
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(17, 30, 58, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 0.34rem 0.66rem;
+}
+
+.onlineIndicator {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-ion);
+  margin-right: 0.35rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.viewAll {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.recentGames {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gameLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.gameItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, rgba(16, 30, 58, 0.9), rgba(9, 17, 34, 0.94));
+  padding: 0.62rem 0.75rem;
+  transition: all var(--transition-fast);
+}
+
+.gameItem:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(34, 211, 238, 0.38);
+}
+
+.gameResult {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 0.58rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.won .gameResult {
+  background: rgba(45, 240, 165, 0.18);
+  color: #88ffc9;
+}
+
+.lost .gameResult {
+  background: rgba(255, 101, 136, 0.2);
+  color: #ffc0d0;
+}
+
+.tie .gameResult {
+  background: rgba(247, 198, 81, 0.2);
+  color: #ffe098;
+}
+
+.gameInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.opponent {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.score {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.ratingChange {
+  font-size: 0.78rem;
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  padding: 0.17rem 0.38rem;
+}
+
+.ratingChange.positive {
+  background: rgba(45, 240, 165, 0.14);
+  color: #88ffc9;
+}
+
+.ratingChange.negative {
+  background: rgba(255, 101, 136, 0.14);
+  color: #ffc0d0;
+}
+
+.emptyState {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 1.4rem 1rem;
+}
+
+.emptyState p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.connectionBanner {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.connectionBanner.connected {
+  background: rgba(45, 240, 165, 0.16);
+  color: #88ffc9;
+}
+
+.connectionBanner.disconnected {
+  background: rgba(255, 101, 136, 0.16);
+  color: #ffc0d0;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@media (max-width: 1060px) {
+  .statsSection {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ratingCard {
+    grid-column: 1 / -1;
+  }
+
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .playOptions {
+    flex-direction: column;
+  }
+
+  .statsSection {
+    grid-template-columns: 1fr;
+  }
+
+  .quickActions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .quickActions > a {
+    width: 100%;
+  }
+
+  .quickActions :global(button) {
+    width: 100%;
+  }
+
+  .connectionBanner {
+    left: 0.7rem;
+    right: 0.7rem;
+    justify-content: center;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

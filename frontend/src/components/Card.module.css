@@ -1,0 +1,67 @@
+.card {
+  background: linear-gradient(165deg, rgba(13, 24, 48, 0.9), rgba(8, 16, 30, 0.9));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(14px);
+  padding: 1.35rem;
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(34, 211, 238, 0.14), transparent 42%),
+    radial-gradient(circle at 90% 100%, rgba(45, 240, 165, 0.08), transparent 44%);
+}
+
+.default {
+  box-shadow: var(--shadow-md);
+}
+
+.elevated {
+  box-shadow: var(--shadow-lg);
+}
+
+.flat {
+  box-shadow: none;
+}
+
+.glow {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+}
+
+.hoverable:hover {
+  transform: translateY(-4px) scale(1.002);
+  border-color: rgba(34, 211, 238, 0.45);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.card3d {
+  background: linear-gradient(160deg, rgba(16, 30, 58, 0.95), rgba(8, 16, 32, 0.98));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 1.35rem;
+  box-shadow:
+    0 6px 0 rgba(3, 9, 20, 0.6),
+    0 20px 34px rgba(1, 8, 24, 0.65);
+  transition: all var(--transition-fast);
+}
+
+.card3d:hover {
+  transform: translateY(-2px);
+}
+
+.card3d:active {
+  transform: translateY(2px);
+}

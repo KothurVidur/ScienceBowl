@@ -1,0 +1,83 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Misc
+*.pem
+*.key
+.cache/
+.temp/
+.tmp/
+tmp/
+temp/
+
+# Docker
+.docker/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Question pipeline local artifacts
+backend/src/questions/python/QuestionsVENV/
+backend/src/questions/raw.json
+backend/src/questions/raw2.json
+backend/src/questions/raw_converted.json

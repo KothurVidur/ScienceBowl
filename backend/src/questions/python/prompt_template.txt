@@ -1,0 +1,398 @@
+
+Convert the following Science Bowl set text into JSON.
+
+Return ONLY a JSON array of objects following this schema:
+[
+  {
+    "n": The number of the question,
+    "t": "T (for tossup) | B (for bonus)",
+    "f": "SA (for Short Answer) | MC (for Multiple Choice)",
+    "c": "M (for Mathematics) | P (for Physics) | C (for Chemistry) | B (for Biology) | S (for Earth and Space) | E (for Energy) | O (for Other)",
+    "q": "question text",
+    "cs": ["choice for W if multiple choice", "choice for X if multiple choice", "choice for Y if multiple choice", "choice for Z if multiple choice"]
+    "a": {
+      "c": "answer text (must be ALL CAPS)",
+      "a": ["optional alternate 1 (ALL CAPS)", "optional alternate 2 (ALL CAPS)", ...]
+    },
+    "m": true/false
+  }
+]
+
+Example:
+
+Here is some input text:
+
+=== BEGIN EXAMPLE INPUT ===
+
+Double Elimination Question Set 8
+-Finals Round 1-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Questions will begin on the next page.
+(c) Saratoga High Science Bowl Team Members
+
+
+
+
+
+
+
+
+Quick Navigation:
+
+
+1. Chemistry
+2. Biology
+3. Physics
+4. Math
+5. E&S
+6. Y-Risk
+7. Chemistry
+8. Math
+9. E&S
+10. Biology
+11. Physics
+12. Y-Risk
+13. E&S
+14. Biology
+15. Chemistry
+16. Math
+17. Y-Risk
+18. Physics
+19. Chemistry
+20. Math
+21. Biology
+22. Physics
+23. E&S
+24. Est
+*E&S = Earth and Space, Est = Estimation.
+
+TOSS-UP
+
+1) Chemistry - Short Answer By name or number, select all of the following three modifications to benzoic acid at the para position in order of increasing pKa.
+
+1. Hydroxy group
+2. Methoxy group
+3. Fluorine atom
+
+ANSWER: 3, 1, 2 [AG]
+
+BONUS
+
+1) Chemistry - Multiple Choice When 2-aminopentane is treated with excess iodomethane, then silver oxide in water, what product is preferentially produced?
+
+W) 1-pentene
+X) 2-pentene
+Y) 1-pentyne
+Z) 2-pentyne
+
+ANSWER: W) 1-PENTENE [AG]
+
+TOSS-UP
+
+2) Biology - Short Answer In intracellular trafficking, which coat protein complex is primarily responsible for the anterograde transport of vesicles from the endoplasmic reticulum to the Golgi apparatus?
+
+ANSWER: COPII [AK]
+
+BONUS
+
+2) Biology - Multiple Choice Which small GTP-binding protein regulates the COPI [cop-one] coat assembly for retrograde transport from the Golgi to the ER?
+
+W) Sar1
+X) Rho
+Y) ADP-Ribosylation Factor 1
+Z) Ran
+
+ANSWER: Y) ADP-RIBOSYLATION FACTOR 1 [AK]
+
+TOSS-UP
+
+3) Physics - Multiple Choice Students at Saratoga High School have discovered a new supermassive black hole, UR-M0M* [read as: you-are-dash-em-zero-em-star], with mass M and entropy S. If the mass of the black hole was instead 3M, in terms of S, what would be the new entropy of this black hole?
+
+W) S/3
+X) S
+Y) 3S
+Z) 9S
+
+ANSWER: Z) 9S [MR]
+
+BONUS
+
+3) Physics - Multiple Choice Students at Saratoga High School continue studying black holes. They learn that photons can orbit a black hole inside the photon sphere, a region just outside the Schwarzschild radius, where any small push to a photon inward or outward would send a photon either spiraling into the black hole or allowing it to escape the black hole entirely, respectively. What type of equilibrium describes these photon orbits?
+
+W) Asymptotically stable
+X) Metastable
+Y) Dynamically unstable
+Z) Lyapunov [li-a-pu-nov] unstable
+
+ANSWER: Y) DYNAMICALLY UNSTABLE [MR]
+
+TOSS-UP
+
+4) Math - Multiple Choice Lawson the ant is placed on the bottom left square in a 3x3 square grid. Every second, he randomly chooses to move to a vertically or horizontally adjacent square, with an equal probability to move to each adjacent square. What is the probability that Lawson is in the center square after 2026 seconds have passed?
+
+W) 1/9
+X) 1/6
+Y) 1/3
+Z) 1/2
+
+ANSWER: Y) 1/3 [QG]
+
+BONUS
+
+4) Math - Short Answer Lawson the ant decides that a 3x3 grid is too small, so he renovates the environment to be a 5x5 grid instead. He starts in the center square and follows the same procedure as before. Each second, he moves to an adjacent square, with an equal probability to move to each adjacent square. What is the probability that Lawson is back in the center after 4 seconds?
+
+ANSWER: 7/48 [QG]
+
+TOSS-UP
+
+5) Earth and Space - Multiple Choice Historically, Vega has been used as the zero-point reference star for the magnitude scale, meaning it was assigned apparent magnitude 0 at all wavelengths and every star's magnitude was measured relative to Vega's. However, more modern research indicates that Vega might not be the ideal calibration star it was once thought of. Which of the following is NOT a reason for why Vega is an unreliable calibration star?
+
+W) Its high recessional velocity causes significant Doppler shifts, altering its magnitude inconsistently across wavelengths
+X) It has been discovered to be a variable star, making its brightness inconsistent
+Y) Its rapid rotation causes temperature differences, causing it to have variable emission spectra across its surface
+Z) It has unique infrared excesses due to a debris disk, altering its spectrum
+
+ANSWER: W) ITS HIGH RECESSIONAL VELOCITY CAUSES SIGNIFICANT DOPPLER SHIFTS, ALTERING ITS MAGNITUDE INCONSISTENTLY ACROSS WAVELENGTHS [MR]
+
+BONUS
+
+5) Earth and Space - Multiple Choice Which of the following does the Torino scale measure?
+
+W) Near-Earth object impacts
+X) Subsurface volcanic eruptions
+Y) Impacts of CFCs in the atmosphere
+Z) Size of sunspots
+
+ANSWER: W) NEAR-EARTH OBJECT IMPACTS [AG]
+
+TOSS-UP
+
+6) Y-Risk - Multiple Choice Students at Saratoga High School are researching a very important question: What does the fox say? Max thinks he can solve for what the fox says, if only he had a theory of everything. Which of the following is not a candidate for a theory of everything?
+
+W) Pilot Wave Theory
+X) Quantum Loop Gravity
+Y) String Theory
+Z) Casual Dynamical Triangulations ANSWER: W) PILOT WAVE THEORY [MR]
+BONUS
+
+6) Y-Risk - Short Answer Which of the following mechanisms allows models such as ResNet to take advantage of much deeper neural network architectures?
+
+W) Feature extraction pyramids
+X) Attention modules
+Y) Feature map caching
+Z) Skip connections
+
+ANSWER: Z) SKIP CONNECTIONS [WC]
+
+=== END EXAMPLE INPUT ===
+
+The output should look like:
+
+=== BEGIN EXAMPLE OUTPUT ===
+
+[
+  {
+    "n": 1,
+    "t": "T",
+    "f": "SA",
+    "c": "C",
+    "q": "By name or number, select all of the following three modifications to benzoic acid at the para position in order of increasing pKa. 1. Hydroxy group 2. Methoxy group 3. Fluorine atom",
+    "cs": [],
+    "a": {
+      "c": "3, 1, 2",
+      "a": ["3 1 2", "312", "FLUORINE ATOM, METHOXY GROUP, HYDROXY GROUP", "FLUORINE ATOM METHOXY GROUP HYDROXY GROUP"]
+    },
+    "m": false
+  },
+  {
+    "n": 1,
+    "t": "B",
+    "f": "MC",
+    "c": "C",
+    "q": "When 2-aminopentane is treated with excess iodomethane, then silver oxide in water, what product is preferentially produced?",
+    "cs": ["1-pentene", "2-pentene", "1-pentyne", "2-pentyne"],
+    "a": {
+      "c": "W",
+      "a": ["1-PENTENE"]
+    },
+    "m": false
+  },
+  {
+    "n": 2,
+    "t": "T",
+    "f": "SA",
+    "c": "B",
+    "q": "In intracellular trafficking, which coat protein complex is primarily responsible for the anterograde transport of vesicles from the endoplasmic reticulum to the Golgi apparatus?",
+    "cs": [],
+    "a": {
+      "c": "COPII",
+      "a": []
+    },
+    "m": false
+  },
+  {
+    "n": 2,
+    "t": "B",
+    "f": "MC",
+    "c": "B",
+    "q": "Which small GTP-binding protein regulates the COPI coat assembly for retrograde transport from the Golgi to the ER?",
+    "cs": ["Sar1", "Rho", "ADP-Ribosylation Factor 1", "Ran"],
+    "a": {
+      "c": "Y",
+      "a": ["ADP-RIBOSYLATION FACTOR 1"]
+    },
+    "m": true
+  },
+  {
+    "n": 3,
+    "t": "T",
+    "f": "MC",
+    "c": "P",
+    "q": "Students at Saratoga High School have discovered a new supermassive black hole, UR-M0M*, with mass M and entropy S. If the mass of the black hole was instead 3M, in terms of S, what would be the new entropy of this black hole?",
+    "cs": ["S/3", "S", "3S", "9S"],
+    "a": {
+      "c": "Z",
+      "a": ["9S"]
+    },
+    "m": true
+  },
+  {
+    "n": 3,
+    "t": "B",
+    "f": "MC",
+    "c": "P",
+    "q": "Students at Saratoga High School continue studying black holes. They learn that photons can orbit a black hole inside the photon sphere, a region just outside the Schwarzschild radius, where any small push to a photon inward or outward would send a photon either spiraling into the black hole or allowing it to escape the black hole entirely, respectively. What type of equilibrium describes these photon orbits?",
+    "cs": ["Asymptotically stable", "Metastable", "Dynamically unstable", "Lyapunov unstable"],
+    "a": {
+      "c": "Y",
+      "a": ["DYNAMICALLY UNSTABLE"]
+    },
+    "m": true
+  },
+  {
+    "n": 4,
+    "t": "T",
+    "f": "MC",
+    "c": "M",
+    "q": "Lawson the ant is placed on the bottom left square in a 3x3 square grid. Every second, he randomly chooses to move to a vertically or horizontally adjacent square, with an equal probability to move to each adjacent square. What is the probability that Lawson is in the center square after 2026 seconds have passed?",
+    "cs": ["1/9", "1/6", "1/3", "1/2"],
+    "a": {
+      "c": "Y",
+      "a": ["1/3"]
+    },
+    "m": false
+  },
+  {
+    "n": 4,
+    "t": "B",
+    "f": "SA",
+    "c": "M",
+    "q": "Lawson the ant decides that a 3x3 grid is too small, so he renovates the environment to be a 5x5 grid instead. He starts in the center square and follows the same procedure as before. Each second, he moves to an adjacent square, with an equal probability to move to each adjacent square. What is the probability that Lawson is back in the center after 4 seconds?",
+    "cs": [],
+    "a": {
+      "c": "7/48",
+      "a": ["SEVEN OVER FORTY EIGHT"]
+    },
+    "m": false
+  },
+  {
+    "n": 5,
+    "t": "T",
+    "f": "MC",
+    "c": "S",
+    "q": "Historically, Vega has been used as the zero-point reference star for the magnitude scale, meaning it was assigned apparent magnitude 0 at all wavelengths and every star's magnitude was measured relative to Vega's. However, more modern research indicates that Vega might not be the ideal calibration star it was once thought of. Which of the following is NOT a reason for why Vega is an unreliable calibration star?",
+    "cs": [
+      "Its high recessional velocity causes significant Doppler shifts, altering its magnitude inconsistently across wavelengths",
+      "It has been discovered to be a variable star, making its brightness inconsistent",
+      "Its rapid rotation causes temperature differences, causing it to have variable emission spectra across its surface",
+      "It has unique infrared excesses due to a debris disk, altering its spectrum"
+    ],
+    "a": {
+      "c": "W",
+      "a": ["ITS HIGH RECESSIONAL VELOCITY CAUSES SIGNIFICANT DOPPLER SHIFTS, ALTERING ITS MAGNITUDE INCONSISTENTLY ACROSS WAVELENGTHS"]
+    },
+    "m": false
+  },
+  {
+    "n": 5,
+    "t": "B",
+    "f": "MC",
+    "c": "S",
+    "q": "Which of the following does the Torino scale measure?",
+    "cs": ["Near-Earth object impacts", "Subsurface volcanic eruptions", "Impacts of CFCs in the atmosphere", "Size of sunspots"],
+    "a": {
+      "c": "W",
+      "a": ["NEAR-EARTH OBJECT IMPACTS"]
+    },
+    "m": false
+  },
+  {
+    "n": 6,
+    "t": "T",
+    "f": "MC",
+    "c": "O",
+    "q": "Students at Saratoga High School are researching a very important question: What does the fox say? Max thinks he can solve for what the fox says, if only he had a theory of everything. Which of the following is not a candidate for a theory of everything?",
+    "cs": ["Pilot Wave Theory", "Quantum Loop Gravity", "String Theory", "Casual Dynamical Triangulations"],
+    "a": {
+      "c": "W",
+      "a": ["PILOT WAVE THEORY"]
+    },
+    "m": false
+  },
+  {
+    "n": 6,
+    "t": "B",
+    "f": "SA",
+    "c": "O",
+    "q": "Which of the following mechanisms allows models such as ResNet to take advantage of much deeper neural network architectures?",
+    "cs": [],
+    "a": {
+      "c": "Z",
+      "a": ["SKIP CONNECTIONS"]
+    },
+    "m": false
+  }
+]
+
+=== END EXAMPLE OUTPUT ===
+
+Rules:
+- Include all questions in the input text.
+- Use "choices" only for multiple choice.
+- Keep question order from the text.
+- Return valid JSON only (no markdown, no commentary).
+- All canonical and alternate answers must be in ALL CAPS.
+- For multiple choice questions, the canonical answer will be the letter, and the one and only alternate answer must be the choice written out in ALL CAPS.
+- Replace any category that's not one of the 6 core categories plus Other with Other.
+- If you see ANY OF THE FOLLOWING, then (and ONLY THEN) flag manual as true:
+1. Symbols that are not alphanumeric.
+2. Anywhere there is a [read as: ...] or general bracket with pronunciation guide present.
+
+Input text:
+
+=== BEGIN ACTUAL INPUT ===
+
+${text}
+
+=== END ACTUAL INPUT ===

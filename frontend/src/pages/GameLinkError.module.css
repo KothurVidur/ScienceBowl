@@ -1,0 +1,46 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.card {
+  width: min(560px, 100%);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+}
+
+.iconWrap {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.75rem;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.card h1 {
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.meta {
+  color: var(--text-primary);
+}
+
+.redirect {
+  font-size: 0.9rem;
+}

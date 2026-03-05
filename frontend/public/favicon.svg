@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="url(#grad)"/>
+  
+  <!-- Flask shape -->
+  <path d="M40 25 L40 45 L25 75 C23 80 27 85 33 85 L67 85 C73 85 77 80 75 75 L60 45 L60 25" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  
+  <!-- Flask opening -->
+  <path d="M38 25 L62 25" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="4" 
+        stroke-linecap="round"/>
+  
+  <!-- Liquid in flask -->
+  <path d="M35 65 Q50 55 65 65 L60 75 C58 78 56 78 50 78 C44 78 42 78 40 75 Z" 
+        fill="white" 
+        opacity="0.8"/>
+  
+  <!-- Bubbles -->
+  <circle cx="42" cy="70" r="3" fill="white" opacity="0.6"/>
+  <circle cx="55" cy="72" r="2" fill="white" opacity="0.6"/>
+  <circle cx="48" cy="66" r="2" fill="white" opacity="0.6"/>
+</svg>

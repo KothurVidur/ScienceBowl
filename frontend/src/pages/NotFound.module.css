@@ -1,0 +1,131 @@
+.notFound {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  text-align: center;
+  z-index: 1;
+}
+
+.errorCode {
+  font-size: 8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-400), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.content p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Decoration */
+.decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.atom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+}
+
+.nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background: var(--primary-500);
+  border-radius: 50%;
+  box-shadow: 0 0 40px var(--primary-500);
+}
+
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  border: 2px solid var(--primary-500);
+  border-radius: 50%;
+  animation: orbit 20s linear infinite;
+}
+
+.orbit:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+
+.orbit:nth-child(3) {
+  width: 300px;
+  height: 300px;
+  margin-top: -150px;
+  margin-left: -150px;
+  animation-duration: 30s;
+  animation-direction: reverse;
+}
+
+.orbit:nth-child(4) {
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  animation-duration: 40s;
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .errorCode {
+    font-size: 5rem;
+  }
+
+  .content h1 {
+    font-size: 1.5rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .atom {
+    width: 200px;
+    height: 200px;
+  }
+}

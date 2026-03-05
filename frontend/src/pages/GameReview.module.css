@@ -1,0 +1,222 @@
+.reviewPage {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header p {
+  margin: 0.25rem 0 0;
+  color: var(--text-secondary);
+}
+
+.unresolvedBadge {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.summary {
+  margin-bottom: 1rem;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.questionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cycleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cycleHeader h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.cycleBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+
+.questionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.questionHeader h3 {
+  margin: 0;
+}
+
+.format {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.questionMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reportButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--border-color);
+  background: rgba(34, 211, 238, 0.08);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  padding: 0.16rem 0.5rem;
+  cursor: pointer;
+}
+
+.reportButton:hover:not(:disabled) {
+  color: var(--text-primary);
+  border-color: rgba(34, 211, 238, 0.45);
+}
+
+.reportButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.questionText {
+  margin: 0;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem;
+  color: var(--text-secondary);
+}
+
+.answersGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.answerBlock {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+}
+
+.answerLine {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.answerMeta {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--text-secondary);
+}
+
+.protestBox {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  background: var(--bg-tertiary);
+}
+
+.protestStatus {
+  margin: 0.35rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.protestVoteRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.protestButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.correct {
+  color: var(--accent-emerald);
+}
+
+.incorrect {
+  color: var(--accent-rose);
+}
+
+.stateScreen {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .summaryGrid {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+
+  .cycleBody {
+    grid-template-columns: 1fr;
+  }
+
+  .answersGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

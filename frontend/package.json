@@ -1,0 +1,67 @@
+{
+  "_comment_overview": "============================================================",
+  "_comment_1": "PACKAGE.JSON - FRONTEND PROJECT CONFIGURATION",
+  "_comment_2": "Defines dependencies, scripts, and metadata for the React app.",
+  "_comment_3": "============================================================",
+  
+  "name": "sciencebowl-online-frontend",
+  "version": "1.0.0",
+  
+  "_comment_private": "private: true prevents accidentally publishing to npm",
+  "private": true,
+  
+  "_comment_deps_header": "============================================================",
+  "_comment_deps_explain": "DEPENDENCIES - Packages required to run the application",
+  "_comment_react": "react: The core React library for building UI components",
+  "_comment_reactdom": "react-dom: React renderer for web browsers (DOM manipulation)",
+  "_comment_router": "react-router-dom: Client-side routing (maps URLs to components)",
+  "_comment_socketio": "socket.io-client: Real-time communication with backend (WebSocket)",
+  "_comment_axios": "axios: HTTP client for making API requests (better than fetch)",
+  "_comment_framer": "framer-motion: Animation library for React (smooth, declarative animations)",
+  "_comment_toast": "react-hot-toast: Toast notifications (success/error popups)",
+  "_comment_icons": "react-icons: Icon library (includes FontAwesome, Material, etc.)",
+  "_comment_recharts": "recharts: Charting library for React (rating history graphs)",
+  "_comment_datefns": "date-fns: Date utility library (formatting, parsing dates)",
+  "_comment_deps_footer": "============================================================",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1",
+    "socket.io-client": "^4.6.1",
+    "axios": "^1.6.2",
+    "framer-motion": "^10.17.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.0.1",
+    "recharts": "^2.10.3",
+    "date-fns": "^3.2.0"
+  },
+  
+  "_comment_devdeps_header": "============================================================",
+  "_comment_devdeps_explain": "DEV DEPENDENCIES - Only needed during development/build",
+  "_comment_vite_plugin": "@vitejs/plugin-react: Vite plugin for React (enables JSX, Fast Refresh)",
+  "_comment_eslint": "eslint: JavaScript linter for finding and fixing problems in code",
+  "_comment_eslint_plugin_react": "eslint-plugin-react: React-specific linting rules for ESLint",
+  "_comment_eslint_plugin_react_hooks": "eslint-plugin-react-hooks: ESLint rules for React hooks",
+  "_comment_devdeps_footer": "============================================================",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.10",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  },
+  
+  "_comment_scripts_header": "============================================================",
+  "_comment_scripts_explain": "SCRIPTS - Commands run with 'npm run <script-name>'",
+  "_comment_dev": "dev: Start development server with hot reload (instant updates)",
+  "_comment_build": "build: Create production build (minified, optimized for deployment)",
+  "_comment_preview": "preview: Preview production build locally (test before deploying)",
+  "_comment_lint": "lint: Run ESLint to find and fix problems in code",
+  "_comment_scripts_footer": "============================================================",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src/"
+  }
+}
