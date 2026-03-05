@@ -32,6 +32,19 @@ import { useAuth } from './AuthContext';
 // Create the Context
 const SocketContext = createContext(null);
 
+const trimTrailingSlash = (value = '') => String(value || '').replace(/\/+$/, '');
+
+const inferSocketBaseUrl = () => {
+  const explicitSocketUrl = trimTrailingSlash(import.meta.env.VITE_SOCKET_URL || '');
+  if (explicitSocketUrl) return explicitSocketUrl;
+
+  const apiUrl = trimTrailingSlash(import.meta.env.VITE_API_URL || '');
+  if (!apiUrl) return '';
+
+  // If API URL ends with /api, connect Socket.IO at the service root.
+  return apiUrl.replace(/\/api$/i, '');
+};
+
 /**
  * CUSTOM HOOK: useSocket
  * 
@@ -143,7 +156,7 @@ export const SocketProvider = ({ children }) => {
      * import.meta.env.VITE_* accesses variables from .env file.
      * Variables must be prefixed with VITE_ to be exposed to client.
      */
-    const socketInstance = io(import.meta.env.VITE_API_URL || '', {
+    const socketInstance = io(inferSocketBaseUrl(), {
       auth: { token },  // Backend uses this for authentication
       transports: ['websocket', 'polling'],  // Prefer WebSocket
       reconnection: true,

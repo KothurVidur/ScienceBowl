@@ -16,9 +16,42 @@ const initializeSocket = require('./socket');
 const app = express();
 const server = http.createServer(app);
 
+const parseAllowedOrigins = () => {
+  const configured = String(process.env.FRONTEND_URL || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  const defaultOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+  return Array.from(new Set([...configured, ...defaultOrigins]));
+};
+
+const allowedOrigins = parseAllowedOrigins();
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+
+  if (allowedOrigins.includes(origin)) return true;
+
+  // Optional wildcard support for Vercel preview domains.
+  if (process.env.ALLOW_VERCEL_PREVIEW_ORIGINS === 'true') {
+    try {
+      const hostname = new URL(origin).hostname;
+      return hostname.endsWith('.vercel.app');
+    } catch {
+      return false;
+    }
+  }
+
+  return false;
+};
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: (origin, callback) => {
+      if (isAllowedOrigin(origin)) return callback(null, true);
+      return callback(new Error(`Origin not allowed by CORS: ${origin}`));
+    },
     methods: ['GET', 'POST'],
     credentials: true
   },
@@ -43,7 +76,10 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    if (isAllowedOrigin(origin)) return callback(null, true);
+    return callback(new Error(`Origin not allowed by CORS: ${origin}`));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

@@ -112,6 +112,34 @@ Services:
 - Backend API: http://localhost:5000
 - MongoDB: localhost:27017
 
+## Vercel Deployment (Production)
+
+This repo is set up for **frontend deployment on Vercel** using [`vercel.json`](./vercel.json).
+
+Important architecture note:
+- The backend uses long-lived **Socket.IO** connections.
+- Vercel Functions are serverless and are not suitable for this persistent realtime backend.
+- Deploy backend separately (Render/Railway/Fly/VM), then point Vercel frontend to it.
+
+### 1. Deploy Backend First
+
+Deploy `backend/` to a Node host and set environment variables:
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `FRONTEND_URL` (comma-separated allowed frontend origins)
+- `ALLOW_VERCEL_PREVIEW_ORIGINS=true` (optional, for preview deployments)
+- SMTP and rate-limit vars as needed
+
+### 2. Deploy Frontend to Vercel
+
+Import this repository in Vercel (root project directory is supported via `vercel.json`).
+
+Set frontend env vars in Vercel:
+- `VITE_API_URL=https://<your-backend-domain>/api`
+- `VITE_SOCKET_URL=https://<your-backend-domain>` (optional; inferred from `VITE_API_URL` if omitted)
+
+Then deploy.
+
 ## API Documentation
 
 ### Authentication

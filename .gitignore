@@ -55,6 +55,9 @@ temp/
 # Docker
 .docker/
 
+# Vercel
+.vercel/
+
 # OS files
 .DS_Store
 .DS_Store?

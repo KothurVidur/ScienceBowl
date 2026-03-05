@@ -34,7 +34,13 @@ import axios from 'axios';
  * 
  * Fallback to '/api' for production (Nginx proxies /api to backend)
  */
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const resolveApiUrl = () => {
+  const configured = String(import.meta.env.VITE_API_URL || '').trim();
+  if (configured) return configured.replace(/\/+$/, '');
+  return '/api';
+};
+
+const API_URL = resolveApiUrl();
 
 /**
  * CREATE AXIOS INSTANCE
