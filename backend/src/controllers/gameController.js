@@ -12,27 +12,10 @@ const {
   normalizeDifficulty,
   difficultyBand
 } = require('../utils/questionSchema');
-const AI_DIFFICULTY_QUESTION_RANGE = {
-  easy: {
-    min: 0.0,
-    max: 0.45
-  },
-  medium: {
-    min: 0.3,
-    max: 0.7
-  },
-  hard: {
-    min: 0.55,
-    max: 0.9
-  },
-  expert: {
-    min: 0.75,
-    max: 1.0
-  }
-};
+const AI_DIFFICULTIES = new Set(['easy', 'medium', 'hard', 'expert']);
 const resolveAIDifficulty = value => {
   const normalized = String(value || '').trim().toLowerCase();
-  return Object.prototype.hasOwnProperty.call(AI_DIFFICULTY_QUESTION_RANGE, normalized) ? normalized : 'medium';
+  return AI_DIFFICULTIES.has(normalized) ? normalized : 'medium';
 };
 const hasUniqueQuestionIds = (questions = []) => {
   const ids = questions.map(q => String(q?._id || '')).filter(Boolean);
@@ -156,14 +139,9 @@ const createGame = asyncHandler(async (req, res) => {
     throw new ApiError('Unable to generate game code. Please try again.', 500);
   }
   const selectedAIDifficulty = resolveAIDifficulty(aiDifficulty);
-  const aiQuestionRange = AI_DIFFICULTY_QUESTION_RANGE[selectedAIDifficulty];
-  const questionSelectionOptions = gameType === 'ai' ? {
-    difficultyMin: aiQuestionRange.min,
-    difficultyMax: aiQuestionRange.max
-  } : {};
   let questions = [];
   for (let attempt = 0; attempt < 3; attempt += 1) {
-    const candidateQuestions = await Question.getTossupBonusCycles(cycleCount, questionSelectionOptions);
+    const candidateQuestions = await Question.getTossupBonusCycles(cycleCount);
     if (candidateQuestions.length >= questionCount && hasUniqueQuestionIds(candidateQuestions)) {
       questions = candidateQuestions;
       break;
@@ -190,8 +168,7 @@ const createGame = asyncHandler(async (req, res) => {
     totalCycles: cycleCount,
     answerTime: 2000,
     settings: {
-      categoryFilter: categories || [],
-      difficultyFilter: gameType === 'ai' ? `${aiQuestionRange.min}-${aiQuestionRange.max}` : undefined
+      categoryFilter: categories || []
     }
   };
   if (gameType === 'ai') {

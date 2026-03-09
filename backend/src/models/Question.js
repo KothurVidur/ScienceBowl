@@ -267,19 +267,7 @@ questionSchema.statics.getBalancedQuestions = async function getBalancedQuestion
   }
   return allQuestions.sort(() => Math.random() - 0.5).slice(0, count);
 };
-questionSchema.statics.getTossupBonusCycles = async function getTossupBonusCycles(cycles = 10, options = {}) {
-  const parsedMin = Number(options?.difficultyMin);
-  const parsedMax = Number(options?.difficultyMax);
-  const boundedMin = Number.isFinite(parsedMin) ? Math.min(1, Math.max(0, parsedMin)) : 0;
-  const boundedMax = Number.isFinite(parsedMax) ? Math.min(1, Math.max(0, parsedMax)) : 1;
-  const difficultyMin = Math.min(boundedMin, boundedMax);
-  const difficultyMax = Math.max(boundedMin, boundedMax);
-  const difficultyMatch = {
-    difficulty: {
-      $gte: difficultyMin,
-      $lte: difficultyMax
-    }
-  };
+questionSchema.statics.getTossupBonusCycles = async function getTossupBonusCycles(cycles = 10) {
   const result = [];
   const usedQuestionIds = [];
   const usedQuestionIdSet = new Set();
@@ -296,8 +284,7 @@ questionSchema.statics.getTossupBonusCycles = async function getTossupBonusCycle
         type: 'TOSSUP',
         _id: {
           $nin: usedQuestionIds
-        },
-        ...difficultyMatch
+        }
       }
     }, {
       $sample: {
@@ -310,7 +297,6 @@ questionSchema.statics.getTossupBonusCycles = async function getTossupBonusCycle
       isActive: true,
       type: 'BONUS',
       relatedTossup: tossup._id,
-      ...difficultyMatch,
       _id: {
         $nin: usedQuestionIds
       }
@@ -322,7 +308,6 @@ questionSchema.statics.getTossupBonusCycles = async function getTossupBonusCycle
           isActive: true,
           type: 'BONUS',
           category: tossup.category,
-          ...difficultyMatch,
           _id: {
             $nin: usedQuestionIds
           }
@@ -339,7 +324,6 @@ questionSchema.statics.getTossupBonusCycles = async function getTossupBonusCycle
         $match: {
           isActive: true,
           type: 'BONUS',
-          ...difficultyMatch,
           _id: {
             $nin: usedQuestionIds
           }
@@ -356,7 +340,6 @@ questionSchema.statics.getTossupBonusCycles = async function getTossupBonusCycle
         $match: {
           isActive: true,
           type: 'TOSSUP',
-          ...difficultyMatch,
           _id: {
             $nin: usedQuestionIds
           }

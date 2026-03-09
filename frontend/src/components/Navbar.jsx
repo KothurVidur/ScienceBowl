@@ -28,8 +28,8 @@ const Navbar = () => {
         {}
         <Link to={isAuthenticated ? '/dashboard' : '/'} className={styles.logo}>
           <span className={styles.logoIcon}><FiAperture /></span>
-          <span className={styles.logoText}>ScienceBowlOne</span>
-          <span className={styles.logoOnline}>Pro</span>
+          <span className={styles.logoText}>ScienceBowl</span>
+          <span className={styles.logoOnline}>One</span>
         </Link>
 
         {}

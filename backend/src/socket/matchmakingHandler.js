@@ -104,23 +104,16 @@ class MatchmakingHandler {
       const mappedGameType = this.mapQueueTypeToGameType(queueType);
       const cycleCount = 10;
       const questionCount = cycleCount * 2;
-      const difficultyRange = {
-        min: 0,
-        max: 1
-      };
       let questions = [];
       for (let attempt = 0; attempt < 3; attempt += 1) {
-        const candidateQuestions = await Question.getTossupBonusCycles(cycleCount, {
-          difficultyMin: difficultyRange.min,
-          difficultyMax: difficultyRange.max
-        });
+        const candidateQuestions = await Question.getTossupBonusCycles(cycleCount);
         if (Array.isArray(candidateQuestions) && candidateQuestions.length >= questionCount && hasUniqueQuestionIds(candidateQuestions)) {
           questions = candidateQuestions;
           break;
         }
       }
       if (!Array.isArray(questions) || questions.length < questionCount || !hasUniqueQuestionIds(questions)) {
-        throw new Error(`Insufficient tossup/bonus pool in range [${difficultyRange.min}, ${difficultyRange.max}]: ` + `need ${questionCount} unique, got ${questions?.length || 0}`);
+        throw new Error(`Insufficient tossup/bonus pool: need ${questionCount} unique, got ${questions?.length || 0}`);
       }
       const game = await Game.create({
         gameCode,
@@ -145,10 +138,7 @@ class MatchmakingHandler {
           format: toRuntimeFormat(q.format)
         })),
         totalQuestions: questionCount,
-        totalCycles: cycleCount,
-        settings: {
-          difficultyFilter: `${difficultyRange.min}-${difficultyRange.max}`
-        }
+        totalCycles: cycleCount
       });
       const matchData = {
         gameCode,
