@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mongodb:
     image: mongo:7.0
@@ -19,24 +17,24 @@ services:
       timeout: 5s
       retries: 5
 
-  backend:
+  app:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
-    container_name: sciencebowlone-backend
+    container_name: sciencebowlone-app
     restart: unless-stopped
     ports:
-      - "${BACKEND_PORT:-5000}:5000"
+      - "${PORT:-5000}:5000"
     env_file:
-      - ./backend/.env
+      - ./.env
     environment:
       - NODE_ENV=${NODE_ENV:-production}
-      - PORT=5000
+      - PORT=${PORT:-5000}
       - TRUST_PROXY=${TRUST_PROXY:-true}
-      - SERVE_STATIC_FRONTEND=${SERVE_STATIC_FRONTEND:-false}
+      - SERVE_STATIC_FRONTEND=${SERVE_STATIC_FRONTEND:-true}
       - FRONTEND_DIST_PATH=${FRONTEND_DIST_PATH:-../frontend/dist}
-      - CORS_ENABLED=${CORS_ENABLED:-true}
-      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      - CORS_ENABLED=${CORS_ENABLED:-false}
+      - CORS_ORIGINS=${CORS_ORIGINS:-}
       - ALLOW_VERCEL_PREVIEW_ORIGINS=${ALLOW_VERCEL_PREVIEW_ORIGINS:-false}
       - MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:27017/sciencebowl}
       - JWT_SECRET=${JWT_SECRET:-change-this-secret}
@@ -60,24 +58,6 @@ services:
     depends_on:
       mongodb:
         condition: service_healthy
-    networks:
-      - sciencebowlone-network
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-      args:
-        - VITE_APP_NAME=${VITE_APP_NAME:-ScienceBowlOne}
-        - VITE_API_URL=${VITE_API_URL:-/api}
-        - VITE_SOCKET_URL=${VITE_SOCKET_URL:-}
-        - VITE_API_TIMEOUT_MS=${VITE_API_TIMEOUT_MS:-10000}
-    container_name: sciencebowlone-frontend
-    restart: unless-stopped
-    ports:
-      - "${FRONTEND_PORT:-3000}:80"
-    depends_on:
-      - backend
     networks:
       - sciencebowlone-network
 

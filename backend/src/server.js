@@ -1,5 +1,7 @@
-require('dotenv').config();
 const path = require('path');
+require('dotenv').config({
+  path: process.env.DOTENV_CONFIG_PATH || path.resolve(__dirname, '../../.env')
+});
 const express = require('express');
 const http = require('http');
 const {
@@ -25,7 +27,8 @@ const TRUST_PROXY = String(process.env.TRUST_PROXY || 'false').toLowerCase() ===
 const ENABLE_CORS = String(process.env.CORS_ENABLED || (NODE_ENV === 'production' ? 'false' : 'true')).toLowerCase() !== 'false';
 const ALLOW_VERCEL_PREVIEW_ORIGINS = String(process.env.ALLOW_VERCEL_PREVIEW_ORIGINS || 'false').toLowerCase() === 'true';
 const SERVE_STATIC_FRONTEND = String(process.env.SERVE_STATIC_FRONTEND || 'false').toLowerCase() === 'true';
-const FRONTEND_DIST_PATH = path.resolve(process.cwd(), process.env.FRONTEND_DIST_PATH || '../frontend/dist');
+const defaultFrontendDistPath = path.resolve(__dirname, '../../frontend/dist');
+const FRONTEND_DIST_PATH = path.resolve(process.cwd(), process.env.FRONTEND_DIST_PATH || defaultFrontendDistPath);
 const parseAllowedOrigins = () => {
   const configuredOrigins = String(process.env.CORS_ORIGINS || process.env.FRONTEND_URL || '').split(',').map(origin => origin.trim()).filter(Boolean);
   if (configuredOrigins.length > 0) {

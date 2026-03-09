@@ -1,79 +1,100 @@
 # ScienceBowlOne
 
-ScienceBowlOne is a real-time quiz platform with a Node.js backend, React frontend, MongoDB, and Socket.IO.
+ScienceBowlOne is a real-time quiz platform with a React frontend, Node.js backend, MongoDB, and Socket.IO.
 
-## Run Locally
+## Production Deployment
 
-1. Backend
+This project uses one root-level `.env` file for the whole app.
+
+This repository is set up for a single Dockerized application server that serves both the frontend and backend from the same origin.
+
+That means:
+
+- No frontend/backend split deployment is required
+- No CORS configuration is required for the default production path
+- Most hosting services only need environment variable changes and a normal Docker build
+
+### Required Environment Variables
+
+Start from `.env.example` and change only the values that matter for your host:
+
+```env
+MONGODB_URI=your-database-connection-string
+JWT_SECRET=your-long-random-secret
+PUBLIC_APP_URL=https://your-domain.example
+```
+
+Everything else already defaults to the single-server production setup:
+
+- `SERVE_STATIC_FRONTEND=true`
+- `CORS_ENABLED=false`
+- Frontend API calls use same-origin `/api`
+- Socket.IO connects back to the same host automatically
+
+### Build and Run With Docker
+
+```bash
+docker build -t sciencebowlone .
+docker run --env-file .env -p 5000:5000 sciencebowlone
+```
+
+The app will be available on `http://localhost:5000`.
+
+### Run With Docker Compose
+
+```bash
+cp .env.example .env
+docker compose up --build -d
+docker compose logs -f
+docker compose down
+```
+
+The included compose file starts:
+
+- `app`: the combined frontend + backend container
+- `mongodb`: a local MongoDB container for self-hosting
+
+## Local Development
+
+Create one env file at the repository root:
+
+```bash
+cp .env.example .env
+```
+
+That same file is used by:
+
+- the backend server
+- the frontend Vite dev/build config
+- Docker and Docker Compose
+
+### Backend
+
 ```bash
 cd backend
-cp .env.example .env
 npm install
 npm run seed
 npm run dev
 ```
 
-2. Frontend
+### Frontend
+
 ```bash
 cd frontend
-cp .env.example .env
 npm install
 npm run dev
 ```
 
-3. Open `http://localhost:3000`.
+Open `http://localhost:3000`.
 
-## Environment-Driven Deployment
-
-All deployment behavior is controlled by environment variables.
-
-- Backend template: `backend/.env.example`
-- Frontend template: `frontend/.env.example`
-- Unified template: `.env.example`
-
-### Single-Server Deployment (frontend + backend together)
-
-Use these key backend vars:
-
-```env
-SERVE_STATIC_FRONTEND=true
-FRONTEND_DIST_PATH=../frontend/dist
-CORS_ENABLED=false
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/sciencebowl
-```
-
-Build frontend, then start backend:
+## Useful Commands
 
 ```bash
-cd frontend
+npm run install:all
 npm run build
-
-cd ../backend
 npm run start
 ```
 
-Backend serves the API and built frontend from one process/domain.
-
-### Split Deployment (frontend and backend separate)
-
-Use these key vars:
-
-```env
-CORS_ENABLED=true
-CORS_ORIGINS=https://your-frontend-domain.example
-VITE_API_URL=https://your-backend-domain.example/api
-VITE_SOCKET_URL=https://your-backend-domain.example
-```
-
-## Docker Compose
-
-```bash
-docker-compose up -d
-docker-compose logs -f
-docker-compose down
-```
-
-## API Health
+## Health Check
 
 `GET /api/health`
