@@ -1,221 +1,89 @@
-# ==============================================================================
-# DOCKER-COMPOSE.YML - MULTI-CONTAINER ORCHESTRATION
-# ==============================================================================
-#
-# WHAT IS DOCKER?
-# Docker packages applications into "containers" - isolated environments
-# that include everything needed to run: code, runtime, libraries, config.
-#
-# WHY USE DOCKER?
-# - "Works on my machine" solved: Same environment everywhere
-# - Easy deployment: Just docker-compose up
-# - Isolated dependencies: Each service has its own environment
-# - Scalable: Easy to run multiple instances
-#
-# DOCKER CONCEPTS:
-# - Image: A template/blueprint for a container (like a class)
-# - Container: A running instance of an image (like an object)
-# - Volume: Persistent storage that survives container restarts
-# - Network: Virtual network connecting containers
-# - Dockerfile: Instructions to build an image
-# - Docker Compose: Tool to run multiple containers together
-#
-# DOCKER COMPOSE:
-# Instead of running each container manually, docker-compose.yml defines
-# all services and their relationships. One command starts everything.
-#
-# COMMANDS:
-#   docker-compose up        # Start all services
-#   docker-compose up -d     # Start detached (background)
-#   docker-compose down      # Stop all services
-#   docker-compose logs -f   # View logs (follow mode)
-#   docker-compose build     # Rebuild images
-#
-# ==============================================================================
-
-# Compose file format version (3.8 supports modern features)
 version: '3.8'
 
-# ==============================================================================
-# SERVICES - Each service runs in its own container
-# ==============================================================================
 services:
-  # ============================================================================
-  # MONGODB DATABASE SERVICE
-  # ============================================================================
-  # MongoDB is our NoSQL database. Running it in a container means:
-  # - No need to install MongoDB on your machine
-  # - Same version everywhere
-  # - Easy to reset/recreate
   mongodb:
-    # IMAGE
-    # Pulls from Docker Hub: https://hub.docker.com/_/mongo
-    # mongo:7.0 means MongoDB version 7.0
-    # Tags: latest, 7.0, 6.0, etc.
     image: mongo:7.0
-    
-    # CONTAINER NAME
-    # Custom name instead of auto-generated one
-    # Makes it easier to reference in commands: docker logs sciencebowl-mongodb
-    container_name: sciencebowl-mongodb
-    
-    # RESTART POLICY
-    # - no: Never restart
-    # - always: Always restart
-    # - unless-stopped: Restart unless manually stopped
-    # - on-failure: Only restart on error
+    container_name: sciencebowlone-mongodb
     restart: unless-stopped
-    
-    # PORTS
-    # Maps container port to host port: "host:container"
-    # 27017 is MongoDB's default port
-    # This allows connecting from outside Docker (development tools)
     ports:
-      - "27017:27017"
-    
-    # VOLUMES
-    # Persistent storage. Without this, data is lost when container stops.
-    # mongodb_data:/data/db means:
-    # - mongodb_data: Named volume (defined at bottom of file)
-    # - /data/db: MongoDB's data directory inside container
+      - "${MONGODB_PORT:-27017}:27017"
     volumes:
       - mongodb_data:/data/db
-    
-    # ENVIRONMENT VARIABLES
-    # Configure the container
-    # MONGO_INITDB_DATABASE: Creates this database on first run
     environment:
-      - MONGO_INITDB_DATABASE=sciencebowl
-    
-    # NETWORKS
-    # Which Docker network this container connects to
-    # All containers on same network can communicate
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE:-sciencebowl}
     networks:
-      - sciencebowl-network
-    
-    # HEALTHCHECK
-    # How Docker verifies the service is ready
-    # Used by "depends_on: condition: service_healthy"
-    #
-    # test: Command to run (returns 0 = healthy)
-    # interval: How often to check
-    # timeout: Max time for check to complete
-    # retries: How many failures before "unhealthy"
+      - sciencebowlone-network
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # ============================================================================
-  # BACKEND API SERVICE
-  # ============================================================================
-  # Our Node.js/Express backend
   backend:
-    # BUILD
-    # Instead of pulling an image, build from a Dockerfile
-    # context: Where to build from (contains Dockerfile)
-    # dockerfile: Name of Dockerfile (default is "Dockerfile")
     build:
       context: ./backend
       dockerfile: Dockerfile
-    
-    container_name: sciencebowl-backend
+    container_name: sciencebowlone-backend
     restart: unless-stopped
-    
-    # Expose port 5000
     ports:
-      - "5000:5000"
-    
-    # ENVIRONMENT VARIABLES
-    # These are available in Node.js as process.env.VARIABLE_NAME
-    #
-    # ${JWT_SECRET:-default} syntax:
-    # - Uses JWT_SECRET from host's environment if set
-    # - Falls back to default if not set
-    # 
-    # IMPORTANT: In production, set JWT_SECRET in environment!
-    # Never use the default secret in production.
+      - "${BACKEND_PORT:-5000}:5000"
+    env_file:
+      - ./backend/.env
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV:-production}
       - PORT=5000
-      # DATABASE CONNECTION
-      # "mongodb" here is the service name (not localhost)
-      # Docker's internal DNS resolves service names to IPs
-      - MONGODB_URI=mongodb://mongodb:27017/sciencebowl
-      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key-change-in-production}
-      - JWT_EXPIRE=7d
-      - FRONTEND_URL=http://localhost:3000
-    
-    # DEPENDS_ON
-    # Start this container after the specified services
-    # condition: service_healthy waits for MongoDB's healthcheck to pass
-    # This ensures the database is ready before backend starts
+      - TRUST_PROXY=${TRUST_PROXY:-true}
+      - SERVE_STATIC_FRONTEND=${SERVE_STATIC_FRONTEND:-false}
+      - FRONTEND_DIST_PATH=${FRONTEND_DIST_PATH:-../frontend/dist}
+      - CORS_ENABLED=${CORS_ENABLED:-true}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      - ALLOW_VERCEL_PREVIEW_ORIGINS=${ALLOW_VERCEL_PREVIEW_ORIGINS:-false}
+      - MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:27017/sciencebowl}
+      - JWT_SECRET=${JWT_SECRET:-change-this-secret}
+      - JWT_EXPIRE=${JWT_EXPIRE:-7d}
+      - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-900000}
+      - RATE_LIMIT_MAX_REQUESTS=${RATE_LIMIT_MAX_REQUESTS:-100}
+      - REQUEST_SIZE_LIMIT=${REQUEST_SIZE_LIMIT:-10kb}
+      - APP_NAME=${APP_NAME:-ScienceBowlOne}
+      - PUBLIC_APP_URL=${PUBLIC_APP_URL:-http://localhost:3000}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:3000}
+      - APP_URL=${APP_URL:-http://localhost:3000}
+      - PROTEST_AI_PROVIDER=${PROTEST_AI_PROVIDER:-gemini}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-1.5-flash}
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-}
+      - SMTP_SECURE=${SMTP_SECURE:-false}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - SMTP_FROM=${SMTP_FROM:-}
     depends_on:
       mongodb:
         condition: service_healthy
-    
     networks:
-      - sciencebowl-network
+      - sciencebowlone-network
 
-  # ============================================================================
-  # FRONTEND SERVICE
-  # ============================================================================
-  # React app served by Nginx
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    
-    container_name: sciencebowl-frontend
+      args:
+        - VITE_APP_NAME=${VITE_APP_NAME:-ScienceBowlOne}
+        - VITE_API_URL=${VITE_API_URL:-/api}
+        - VITE_SOCKET_URL=${VITE_SOCKET_URL:-}
+        - VITE_API_TIMEOUT_MS=${VITE_API_TIMEOUT_MS:-10000}
+    container_name: sciencebowlone-frontend
     restart: unless-stopped
-    
-    # PORTS
-    # Frontend runs Nginx on port 80 inside container
-    # Map to port 3000 on host for consistency with development
     ports:
-      - "3000:80"
-    
-    # Wait for backend to be available
+      - "${FRONTEND_PORT:-3000}:80"
     depends_on:
       - backend
-    
     networks:
-      - sciencebowl-network
+      - sciencebowlone-network
 
-# ==============================================================================
-# NETWORKS
-# ==============================================================================
-# Docker networks isolate containers and allow communication
-#
-# Containers on the same network can reach each other by service name.
-# Example: Backend can connect to "mongodb:27017" not "localhost:27017"
-#
-# BRIDGE NETWORK:
-# Default network type. Containers share a virtual network.
-# They can communicate internally but are isolated from host network.
 networks:
-  sciencebowl-network:
+  sciencebowlone-network:
     driver: bridge
 
-# ==============================================================================
-# VOLUMES
-# ==============================================================================
-# Named volumes persist data beyond container lifecycle.
-#
-# Without volumes:
-# - Container stops → data is lost
-# - Container deleted → data is lost
-#
-# With named volumes:
-# - Data persists across container restarts
-# - Data persists when container is deleted
-# - Can be backed up and restored
-#
-# Docker manages the actual storage location.
-# View volumes: docker volume ls
-# Inspect: docker volume inspect mongodb_data
 volumes:
   mongodb_data:
-    # Empty definition uses Docker's default driver
-    # Data stored in Docker's data directory (varies by OS)

@@ -1,63 +1,17 @@
 {
-  "_comment_overview": "============================================================",
-  "_comment_1": "PACKAGE.JSON - The manifest file for a Node.js project",
-  "_comment_2": "This file tells npm (Node Package Manager) everything about your project:",
-  "_comment_3": "- What dependencies to install",
-  "_comment_4": "- What scripts can be run",
-  "_comment_5": "- Project metadata (name, version, etc.)",
-  "_comment_6": "When you run 'npm install', npm reads this file and downloads all dependencies",
-  "_comment_7": "============================================================",
-  
-  "name": "sciencebowl-online-backend",
+  "name": "sciencebowlone-backend",
   "version": "1.0.0",
-  "description": "Science Bowl Online - Real-time competitive science quiz platform",
-  
-  "_comment_main": "main: Entry point when this package is imported as a module",
+  "description": "ScienceBowlOne backend",
   "main": "src/server.js",
-  
-  "_comment_scripts": "============================================================",
-  "_comment_scripts_1": "SCRIPTS - Commands you can run with 'npm run <script-name>'",
-  "_comment_scripts_2": "These are shortcuts for common development and deployment tasks",
-  "_comment_scripts_3": "============================================================",
   "scripts": {
-    "_comment_start": "start: Production command - runs the server directly with Node",
     "start": "node src/server.js",
-    
-    "_comment_dev": "dev: Development command - uses nodemon which auto-restarts when you save files",
     "dev": "nodemon src/server.js",
-    
-    "_comment_test": "test: Runs automated tests with Jest testing framework",
     "test": "jest --coverage",
-    
-    "_comment_seed": "seed: Populates the database with initial question data",
     "seed": "node src/utils/seedQuestions.js",
     "import:questions": "node src/questions/importQuestionsFromJson.js",
-    "migrate:questions": "node src/utils/migrateQuestionSchema.js",
-    "build:questions:pdf": "node src/questions/pdfUploadPipeline.js",
-    "build:questions:pdf:ai": "node src/questions/pdfUploadPipeline.js",
-    
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"
   },
-  
-  "_comment_deps": "============================================================",
-  "_comment_deps_1": "DEPENDENCIES - Packages required to run the application",
-  "_comment_deps_2": "These get installed in the node_modules folder",
-  "_comment_deps_3": "The ^ symbol means 'compatible with this version' (allows minor updates)",
-  "_comment_bcrypt": "bcryptjs: Hashes passwords securely (never store plain text passwords!)",
-  "_comment_cors": "cors: Allows your frontend (localhost:3000) to talk to backend (localhost:5000)",
-  "_comment_dotenv": "dotenv: Loads environment variables from .env file (for secrets/config)",
-  "_comment_express": "express: The web framework - handles HTTP requests and routing",
-  "_comment_ratelimit": "express-rate-limit: Prevents abuse by limiting requests per IP",
-  "_comment_validator": "express-validator: Validates and sanitizes user input",
-  "_comment_helmet": "helmet: Adds security headers to protect against common attacks",
-  "_comment_jwt": "jsonwebtoken: Creates tokens for user authentication (like a digital ID card)",
-  "_comment_mongoose": "mongoose: Object Data Modeling (ODM) for MongoDB - makes database operations easier",
-  "_comment_morgan": "morgan: Logs HTTP requests to console (helpful for debugging)",
-  "_comment_nodemailer": "nodemailer: Sends transactional emails (password reset links)",
-  "_comment_socketio": "socket.io: Enables real-time bidirectional communication (for live games)",
-  "_comment_uuid": "uuid: Generates unique identifiers",
-  "_comment_deps_4": "============================================================",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -74,21 +28,12 @@
     "socket.io": "^4.6.1",
     "uuid": "^9.0.0"
   },
-  
-  "_comment_devdeps": "============================================================",
-  "_comment_devdeps_1": "DEV DEPENDENCIES - Only needed during development, not in production",
-  "_comment_nodemon": "nodemon: Watches files and restarts server automatically when you save",
-  "_comment_jest": "jest: Automated testing framework for Node.js",
-  "_comment_supertest": "supertest: HTTP assertions for testing HTTP servers",
-  "_comment_devdeps_2": "============================================================",
   "devDependencies": {
     "eslint": "^8.56.0",
     "jest": "^29.7.0",
     "nodemon": "^3.0.2",
     "supertest": "^6.3.3"
   },
-  
-  "_comment_engines": "engines: Specifies which Node.js version is required",
   "engines": {
     "node": ">=18.0.0"
   },

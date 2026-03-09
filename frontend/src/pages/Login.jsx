@@ -6,7 +6,6 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import toast from 'react-hot-toast';
 import styles from './Auth.module.css';
-
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -14,110 +13,88 @@ const Login = () => {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
-  const { login, isAuthenticated } = useAuth();
+  const {
+    login,
+    isAuthenticated
+  } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || '/dashboard';
-
-  // Redirect if already authenticated
   if (isAuthenticated) {
-    navigate(from, { replace: true });
+    navigate(from, {
+      replace: true
+    });
     return null;
   }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const handleChange = e => {
+    const {
+      name,
+      value
+    } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
     }
   };
-
   const validate = () => {
     const newErrors = {};
-    
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
-    
     if (!formData.password) {
       newErrors.password = 'Password is required';
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    
     if (!validate()) return;
-
     setLoading(true);
     const result = await login(formData);
     setLoading(false);
-
     if (result.success) {
       toast.success('Welcome back!');
-      navigate(from, { replace: true });
+      navigate(from, {
+        replace: true
+      });
     } else {
       toast.error(result.error);
     }
   };
-
-  return (
-    <div className={styles.authPage}>
+  return <div className={styles.authPage}>
       <div className={styles.authContainer}>
         <div className={styles.authCard}>
-          {/* Logo */}
+          {}
           <Link to="/" className={styles.logo}>
             <span className={styles.logoIcon}>⚗️</span>
-            <span className={styles.logoText}>Science Bowl Online</span>
+            <span className={styles.logoText}>ScienceBowlOne</span>
           </Link>
 
           <h1 className={styles.title}>Welcome Back</h1>
           <p className={styles.subtitle}>Sign in to continue your journey</p>
 
           <form onSubmit={handleSubmit} className={styles.form}>
-            <Input
-              label="Email"
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              error={errors.email}
-              icon={<FiMail />}
-            />
+            <Input label="Email" type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} error={errors.email} icon={<FiMail />} />
 
-            <Input
-              label="Password"
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              error={errors.password}
-              icon={<FiLock />}
-            />
+            <Input label="Password" type="password" name="password" placeholder="Enter your password" value={formData.password} onChange={handleChange} error={errors.password} icon={<FiLock />} />
+
             <div className={styles.inlineActionRow}>
               <Link to="/forgot-password" className={styles.inlineLink}>
                 Forgot password?
               </Link>
             </div>
 
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              fullWidth
-              loading={loading}
-              icon={<FiArrowRight />}
-            >
+            <Button type="submit" variant="primary" size="lg" fullWidth loading={loading} icon={<FiArrowRight />}>
+
               Sign In
             </Button>
           </form>
@@ -130,7 +107,7 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Background decoration */}
+        {}
         <div className={styles.decoration}>
           <div className={styles.molecule}>
             <div className={styles.atom}></div>
@@ -140,8 +117,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Login;

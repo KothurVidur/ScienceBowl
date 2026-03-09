@@ -3,30 +3,25 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FiAlertTriangle, FiHome } from 'react-icons/fi';
 import Button from '../components/Button';
 import styles from './GameLinkError.module.css';
-
 const GameLinkError = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const params = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const reason = params.get('reason') || 'invalid';
   const gameCode = params.get('gameCode') || '';
-
   const errorMessage = useMemo(() => {
     if (reason === 'expired') {
       return 'This game has expired or is no longer active.';
     }
     return 'This game link is invalid or no longer available.';
   }, [reason]);
-
   useEffect(() => {
-    // Auto-redirect so users are not stranded on a broken game URL.
-    const redirectTimer = setTimeout(() => navigate('/dashboard', { replace: true }), 3000);
+    const redirectTimer = setTimeout(() => navigate('/dashboard', {
+      replace: true
+    }), 3000);
     return () => clearTimeout(redirectTimer);
   }, [navigate]);
-
-  return (
-    <div className={styles.page}>
+  return <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.iconWrap}>
           <FiAlertTriangle />
@@ -35,12 +30,12 @@ const GameLinkError = () => {
         <p>{errorMessage}</p>
         {gameCode && <p className={styles.meta}>Game Code: <strong>{gameCode}</strong></p>}
         <p className={styles.redirect}>Redirecting to dashboard...</p>
-        <Button variant="primary" icon={<FiHome />} onClick={() => navigate('/dashboard', { replace: true })}>
+        <Button variant="primary" icon={<FiHome />} onClick={() => navigate('/dashboard', {
+        replace: true
+      })}>
           Go to Dashboard
         </Button>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default GameLinkError;

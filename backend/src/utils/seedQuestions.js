@@ -1,96 +1,98 @@
 #!/usr/bin/env node
-
 require('dotenv').config();
 const fs = require('fs/promises');
 const path = require('path');
-const vm = require('vm');
 const mongoose = require('mongoose');
 const Question = require('../models/Question');
-const { normalizeQuestionPayload } = require('./questionSchema');
-
-const DEFAULT_INPUT_PATH = path.join(__dirname, '../questions/aves.txt');
-
-async function loadQuestionArray(filePath) {
+const {
+  normalizeQuestionPayload
+} = require('./questionSchema');
+const DEFAULT_INPUT_PATH = path.join(__dirname, '../questions/sample.json');
+const printUsage = () => {
+  console.log('Usage: node src/utils/seedQuestions.js [input-json-path] [--append]');
+  console.log('  input-json-path: optional, defaults to src/questions/sample.json');
+  console.log('  --append: keep existing questions (default behavior is replace)');
+};
+const loadQuestionArray = async filePath => {
   const raw = await fs.readFile(filePath, 'utf8');
-
-  // Prefer strict JSON first.
-  try {
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) throw new Error('Input JSON must be an array.');
-    return parsed;
-  } catch (_) {
-    // Fall back to JS array literal format (used by aves.txt).
-    const parsed = vm.runInNewContext(`(${raw})`, {}, { timeout: 2500 });
-    if (!Array.isArray(parsed)) throw new Error('Input file must evaluate to an array of question objects.');
-    return parsed;
+  const parsed = JSON.parse(raw);
+  if (!Array.isArray(parsed)) {
+    throw new Error('Input JSON must be an array of question objects.');
   }
-}
-
+  if (!parsed.length) {
+    throw new Error('Input JSON array is empty.');
+  }
+  return parsed;
+};
 async function seedQuestions() {
-  const inputPath = process.argv[2] ? path.resolve(process.argv[2]) : DEFAULT_INPUT_PATH;
+  const args = process.argv.slice(2);
+  if (args.includes('--help') || args.includes('-h')) {
+    printUsage();
+    return;
+  }
+  const inputArg = args.find(arg => !arg.startsWith('--'));
+  const inputPath = inputArg ? path.resolve(inputArg) : DEFAULT_INPUT_PATH;
+  const appendMode = args.includes('--append');
   const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/sciencebowl';
-
-  try {
-    await mongoose.connect(mongoUri);
-    console.log('Connected to MongoDB');
-
-    const rawQuestions = await loadQuestionArray(inputPath);
-    if (!rawQuestions.length) {
-      throw new Error(`No questions found in ${inputPath}`);
-    }
-
-    const normalized = rawQuestions.map((q, index) => {
-      try {
-        return normalizeQuestionPayload(q);
-      } catch (error) {
-        throw new Error(`Question ${index + 1} invalid: ${error.message}`);
+  const rawQuestions = await loadQuestionArray(inputPath);
+  const normalized = rawQuestions.map((q, index) => {
+    try {
+      const normalizedQuestion = normalizeQuestionPayload(q);
+      if (!normalizedQuestion.questionText) {
+        throw new Error('questionText is required');
       }
-    });
-
-    const tossups = normalized.filter((q) => q.type === 'TOSSUP');
-    const bonuses = normalized.filter((q) => q.type === 'BONUS');
-    if (!tossups.length || !bonuses.length) {
-      throw new Error('Question set must include at least one TOSSUP and one BONUS.');
+      if (!normalizedQuestion.answer?.canonical) {
+        throw new Error('answer.canonical is required');
+      }
+      return normalizedQuestion;
+    } catch (error) {
+      throw new Error(`Question #${index + 1} invalid: ${error.message}`);
     }
-
-    await Question.deleteMany({});
-    console.log('Cleared existing questions');
-
-    // Link bonus questions to tossups in the same category when possible.
-    const tossupDocs = tossups.map((q) => ({ ...q, _id: new mongoose.Types.ObjectId() }));
+  });
+  const tossups = normalized.filter(q => q.type === 'TOSSUP');
+  const bonuses = normalized.filter(q => q.type === 'BONUS');
+  if (!tossups.length || !bonuses.length) {
+    throw new Error('Question set must include at least one TOSSUP and one BONUS.');
+  }
+  await mongoose.connect(mongoUri);
+  try {
+    if (!appendMode) {
+      await Question.deleteMany({});
+      console.log('Cleared existing questions.');
+    }
+    const tossupDocs = tossups.map(q => ({
+      ...q,
+      _id: new mongoose.Types.ObjectId()
+    }));
     const tossupsByCategory = tossupDocs.reduce((acc, q) => {
       if (!acc[q.category]) acc[q.category] = [];
       acc[q.category].push(q);
       return acc;
     }, {});
-
     const bonusDocs = bonuses.map((bonus, index) => {
       const pool = tossupsByCategory[bonus.category] || tossupDocs;
       const linkedTossup = pool[index % pool.length];
       return {
         ...bonus,
-        relatedTossup: linkedTossup?._id || null
+        relatedTossup: bonus.relatedTossup || linkedTossup?._id || null
       };
     });
-
-    const inserted = await Question.insertMany([...tossupDocs, ...bonusDocs], { ordered: false });
-    console.log(`Inserted ${inserted.length} questions from ${inputPath}`);
-
-    const stats = await Question.aggregate([
-      { $group: { _id: { type: '$type', category: '$category' }, count: { $sum: 1 } } },
-      { $sort: { '_id.type': 1, '_id.category': 1 } }
-    ]);
-
-    console.log('\nSeed summary by type/category:');
-    stats.forEach((s) => {
-      console.log(`  ${s._id.type} | ${s._id.category}: ${s.count}`);
+    const inserted = await Question.insertMany([...tossupDocs, ...bonusDocs], {
+      ordered: false
     });
-
-    process.exit(0);
-  } catch (error) {
-    console.error('Seeding error:', error.message || error);
-    process.exit(1);
+    const byType = inserted.reduce((acc, q) => {
+      acc[q.type] = (acc[q.type] || 0) + 1;
+      return acc;
+    }, {});
+    console.log(`Seeded ${inserted.length} questions from ${inputPath}`);
+    Object.entries(byType).forEach(([type, count]) => {
+      console.log(`  ${type}: ${count}`);
+    });
+  } finally {
+    await mongoose.disconnect();
   }
 }
-
-seedQuestions();
+seedQuestions().catch(error => {
+  console.error('Seeding error:', error.message || error);
+  process.exit(1);
+});

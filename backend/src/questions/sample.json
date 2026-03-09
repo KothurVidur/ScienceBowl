@@ -1,0 +1,559 @@
+[
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "1"
+    },
+    "category": "Mathematics",
+    "format": "Short Answer",
+    "questionText": "What is the seventh power of the complex number -2i?",
+    "answer": {
+      "canonical": "128i",
+      "alternates": ["One hundred twenty eight i"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "1"
+    },
+    "category": "Mathematics",
+    "format": "Short Answer",
+    "questionText": "A frog starts at the origin and takes 10 leaps. Each leap is either one step right and one step up, or one step right and one step down. At the end of 10 leaps, as a common fraction in simplest terms, what is the probability that the frog's y-coordinate will be 0?",
+    "answer": {
+      "canonical": "63/256",
+      "alternates": ["Sixty three over two hundred and fifty six"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "2"
+    },
+    "category": "Mathematics",
+    "format": "Multiple Choice",
+    "questionText": "Which of the following four functions is an even function?",
+    "choices": {
+      "W": "f(x) = x^3 * cos(x)",
+      "X": "f(x) = x^6 * sin(-x^3)",
+      "Y": "f(x) = x^3 + x^4 * cos(x)",
+      "Z": "f(x) = sin(x^2 + x^4)"
+    },
+    "answer": {
+      "canonical": "Z",
+      "alternates": ["f(x) = sin(x^2 + x^4)", "f of x equals the sin of x squared plus x to the fourth power"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "2"
+    },
+    "category": "Mathematics",
+    "format": "Multiple Choice",
+    "questionText": "Which of the following is closest to the number of zeros in 2^1000?",
+    "choices": {
+      "W": "300",
+      "X": "310",
+      "Y": "320",
+      "Z": "330"
+    },
+    "answer": {
+      "canonical": "W",
+      "alternates": ["300", "Three hundred"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "3"
+    },
+    "category": "Physics",
+    "format": "Short Answer",
+    "questionText": "At temperatures higher than the Hagedorn temperature, what exotic phase of matter is present?",
+    "answer": {
+      "canonical": "Quark-gluon plasma",
+      "alternates": [""]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "3"
+    },
+    "category": "Physics",
+    "format": "Short Answer",
+    "questionText": "By name or number, identify each pair of quantities that are conjugate variables: \n\n 1) Pressure and Temperature \n 2) Pressure and Volume \n 3) Entropy and Temperature \n 4) Entropy and Volume",
+    "answer": {
+      "canonical": "2 and 3",
+      "alternates": ["Two and three", "Pressure and Volume and Entropy and Temperature", "Pressure/Volume, Entropy/Temperature"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "4"
+    },
+    "category": "Physics",
+    "format": "Multiple Choice",
+    "questionText": "Which of the following equations in thermodynamics can predict the slope of the liquid-solid boundary in phase diagrams?",
+    "choices": {
+      "W": "Born-Mayer Equation",
+      "X": "Clausius-Clapeyron Equation",
+      "Y": "Arrhenius Equation",
+      "Z": "Redlich-Kwong Equation"
+    },
+    "answer": {
+      "canonical": "X",
+      "alternates": ["Clausius-Clapeyron Equation"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "4"
+    },
+    "category": "Physics",
+    "format": "Multiple Choice",
+    "questionText": "An RL circuit has a resistor with resistance R, an inductor with inductance L, and time constant τ. If the resistor is swapped with a different resistor of resistance 2R and the inductor is swapped with a different inductor of inductance 2L, what is the new time constant in terms of τ?",
+    "choices": {
+      "W": "τ/4",
+      "X": "τ/2",
+      "Y": "τ",
+      "Z": "4τ"
+    },
+    "answer": {
+      "canonical": "Y",
+      "alternates": ["τ", "Tau"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "5"
+    },
+    "category": "Chemistry",
+    "format": "Short Answer",
+    "questionText": "A 100L solution containing equal concentrations of an unknown monoprotic weak acid and its conjugate base has a pKa of 5.0. In scientific notation to one significant figure, how many moles of H+ are present in this solution?",
+    "answer": {
+      "canonical": "1.0 x 10^-3",
+      "alternates": ["One point zero times ten to the negative third power"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "5"
+    },
+    "category": "Chemistry",
+    "format": "Short Answer",
+    "questionText": "Identify all of the following statements which are true regarding butane: \n\n 1) It has the chemical formula C4H10 \n 2) It's most stable conformation is the gauche conformation \n 3) Butane has exactly two structural isomers",
+    "answer": {
+      "canonical": "1 and 3",
+      "alternates": ["One and three", "All but 2"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "4"
+    },
+    "category": "Chemistry",
+    "format": "Multiple Choice",
+    "questionText": "Which of the following substances has a van't Hoff factor of exactly one?",
+    "choices": {
+      "W": "Sodium chloride",
+      "X": "Acetic acid",
+      "Y": "Sucrose",
+      "Z": "Ammonium chromate"
+    },
+    "answer": {
+      "canonical": "Y",
+      "alternates": ["Sucrose"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "4"
+    },
+    "category": "Chemistry",
+    "format": "Multiple Choice",
+    "questionText": "Which of the following choices is true regarding the second virial coefficient?",
+    "choices": {
+      "W": "A positive second virial coefficient corresponds to repulsive forces dominating over attractive forces",
+      "X": "Higher second virial coefficients are generally associated with closer to ideal behavior",
+      "Y": "For any real gas, there does not exist a tempearture for which the second virial coefficient is zero",
+      "Z": "The second virial coefficient is uniquely determined by the parameter b in the van der Waals equation"
+    },
+    "answer": {
+      "canonical": "W",
+      "alternates": ["A positive second virial coefficient corresponds to repulsive forces dominating over attractive forces"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "7"
+    },
+    "category": "Biology",
+    "format": "Short Answer",
+    "questionText": "What is the name of the set of compounds that replenishes lost electrons from Photosystem II by splitting water into protons and oxygen gas?",
+    "answer": {
+      "canonical": "Oxygen-evolving complex",
+      "alternates": [""]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "7"
+    },
+    "category": "Biology",
+    "format": "Short Answer",
+    "questionText": "Which key enzyme for nitrogen fixation, which contains an iron-molybdenum-sulfur, breaks down atmospheric nitrogen gas and converts it to ammonia?",
+    "answer": {
+      "canonical": "Nitrogenase",
+      "alternates": ["Dinitrogenase"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "8"
+    },
+    "category": "Biology",
+    "format": "Multiple Choice",
+    "questionText": "Which of the following neurotransmitters is most associated with memory encoding?",
+    "choices": {
+      "W": "Serotonin",
+      "X": "Carbon monoxide",
+      "Y": "Norepinephrine",
+      "Z": "Acetylcholine"
+    },
+    "answer": {
+      "canonical": "Z",
+      "alternates": ["Acetylcholine"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "8"
+    },
+    "category": "Biology",
+    "format": "Multiple Choice",
+    "questionText": "On Island A, Species A and Species B, which do not belong to the same family, peacefully coexist. But as global sea levels rise, more and more of Island A's food supply goes underwater, so both species evolve gills along with lungs to be able to spend more time underwater. Which of the following phenomena is this an example of?",
+    "choices": {
+      "W": "Adaptive radiation",
+      "X": "Directional selection",
+      "Y": "Divergent evolution",
+      "Z": "Convergent evolution"
+    },
+    "answer": {
+      "canonical": "Z",
+      "alternates": ["Convergent evolution"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "9"
+    },
+    "category": "Earth and Space",
+    "format": "Short Answer",
+    "questionText": "Which of the seven main types of stars, O, B, A, F, G, K, and M, contains the strongest hydrogen lines?",
+    "answer": {
+      "canonical": "A-Type",
+      "alternates": ["A", "A-Type Stars"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "9"
+    },
+    "category": "Earth and Space",
+    "format": "Short Answer",
+    "questionText": "Earthquake 1 measures a 5 on the moment magnitude scale, while Earthquake 2 measures a 9 on the moment magnitude scale. How many more times energy does Earthquake 2 release than Earthquake 1?",
+    "answer": {
+      "canonical": "1,000,000",
+      "alternates": ["1 million", "One million", "1000000"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "10"
+    },
+    "category": "Earth and Space",
+    "format": "Multiple Choice",
+    "questionText": "Which of the following metamorphic rocks is only found near subduction zones?",
+    "choices": {
+      "W": "Marble",
+      "X": "Eclogite",
+      "Y": "Amphibolite",
+      "Z": "Blueschist"
+    },
+    "answer": {
+      "canonical": "Z",
+      "alternates": ["Blueschist"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "10"
+    },
+    "category": "Earth and Space",
+    "format": "Multiple Choice",
+    "questionText": "Which of the following best explains Kelvin-Helmholtz contraction?",
+    "choices": {
+      "W": "Once a supergiant exhausts all its fuel, right before supernova, it must shrink as it can't balance gravitational forces anymore",
+      "X": "Once a main-sequence star exhausts its hydrogen supply, it must shrink as it can't balance gravitational forces anymore",
+      "Y": "Before main-sequence, a star contracts and converts gravitational potential energy to heat and radiation pressure",
+      "Z": "Whenever a gas cloud is disturbed, it initially contracts slowly as it remains mosttly transparent"
+    },
+    "answer": {
+      "canonical": "Y",
+      "alternates": ["Before main-sequence, a star contracts and converts gravitational potential energy to heat and radiation pressure"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "11"
+    },
+    "category": "Energy",
+    "format": "Short Answer",
+    "questionText": "Scientists at Carnegie Mellon University are analyzing the information contained in entangled quantum states. Which probability distribution contains the maximum entropy of any distribution?",
+    "answer": {
+      "canonical": "Uniform distribution",
+      "alternates": ["Uniform"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "11"
+    },
+    "category": "Energy",
+    "format": "Short Answer",
+    "questionText": "Scientists at Carnegie Mellon University are trying to create new architectures for machine learning models inspired by neuroscientific processes. Which general neural architecture uses techniques such as strides and max-pooling to analyze images, inspired by the human eye?",
+    "answer": {
+      "canonical": "Convolutional Neural Network",
+      "alternates": ["CNN"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "TOSSUP",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "12"
+    },
+    "category": "Energy",
+    "format": "Multiple Choice",
+    "questionText": "Scientists at Carnegie Mellon University are investigating large language models and how we can make them safer in the future. What is the term for prompt engineering LLMs with the intention of producing undesirable behavior?",
+    "choices": {
+      "W": "Jailbreaking",
+      "X": "Sandbagging",
+      "Y": "Fine-tuning",
+      "Z": "Stimulated annealing"
+    },
+    "answer": {
+      "canonical": "W",
+      "alternates": ["Jailbreaking"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  },
+  {
+    "type": "BONUS",
+    "source": {
+      "packet": "None",
+      "round": "1/1",
+      "question": "12"
+    },
+    "category": "Energy",
+    "format": "Multiple Choice",
+    "questionText": "Scientists at Carnegie Mellon University are researching how SAT solvers can be used to deterministically solve large mathematical problems. Which of the following logical expressions is a tautology? Assume x, y, and z are all boolean variables.",
+    "choices": {
+      "W": "(x or z) and (y or not y)",
+      "X": "(x and not z) and (y and not z)",
+      "Y": "(x and y and z) or (x or y or not x)",
+      "Z": "(x and z and not x) or (y and z)"
+    },
+    "answer": {
+      "canonical": "Y",
+      "alternates": ["(x and y and z) or (x or y or not x)"]
+    },
+    "explanation": "",
+    "tags": [],
+    "difficulty": 1,
+    "relatedTossup": null,
+    "isActive": true
+  }
+]

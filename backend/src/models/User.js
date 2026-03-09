@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -51,53 +50,195 @@ const userSchema = new mongoose.Schema({
   },
   ratingHistory: [{
     rating: Number,
-    date: { type: Date, default: Date.now },
+    date: {
+      type: Date,
+      default: Date.now
+    },
     change: Number
   }],
   stats: {
-    gamesPlayed: { type: Number, default: 0 },
-    gamesWon: { type: Number, default: 0 },
-    gamesLost: { type: Number, default: 0 },
-    gamesTied: { type: Number, default: 0 },
-    questionsAnswered: { type: Number, default: 0 },
-    questionsCorrect: { type: Number, default: 0 },
-    categoryStats: {
-      biology: { answered: { type: Number, default: 0 }, correct: { type: Number, default: 0 } },
-      chemistry: { answered: { type: Number, default: 0 }, correct: { type: Number, default: 0 } },
-      physics: { answered: { type: Number, default: 0 }, correct: { type: Number, default: 0 } },
-      mathematics: { answered: { type: Number, default: 0 }, correct: { type: Number, default: 0 } },
-      earthAndSpace: { answered: { type: Number, default: 0 }, correct: { type: Number, default: 0 } },
-      energy: { answered: { type: Number, default: 0 }, correct: { type: Number, default: 0 } },
-      other: { answered: { type: Number, default: 0 }, correct: { type: Number, default: 0 } },
-      uncategorized: { answered: { type: Number, default: 0 }, correct: { type: Number, default: 0 } }
+    gamesPlayed: {
+      type: Number,
+      default: 0
     },
-    currentWinStreak: { type: Number, default: 0 },
-    longestWinStreak: { type: Number, default: 0 },
-    averageResponseTime: { type: Number, default: 0 },
-    fastestCorrectAnswer: { type: Number, default: null },
-    aiGamesPlayed: { type: Number, default: 0 },
-    aiGamesWon: { type: Number, default: 0 }
+    gamesWon: {
+      type: Number,
+      default: 0
+    },
+    gamesLost: {
+      type: Number,
+      default: 0
+    },
+    gamesTied: {
+      type: Number,
+      default: 0
+    },
+    questionsAnswered: {
+      type: Number,
+      default: 0
+    },
+    questionsCorrect: {
+      type: Number,
+      default: 0
+    },
+    categoryStats: {
+      biology: {
+        answered: {
+          type: Number,
+          default: 0
+        },
+        correct: {
+          type: Number,
+          default: 0
+        }
+      },
+      chemistry: {
+        answered: {
+          type: Number,
+          default: 0
+        },
+        correct: {
+          type: Number,
+          default: 0
+        }
+      },
+      physics: {
+        answered: {
+          type: Number,
+          default: 0
+        },
+        correct: {
+          type: Number,
+          default: 0
+        }
+      },
+      mathematics: {
+        answered: {
+          type: Number,
+          default: 0
+        },
+        correct: {
+          type: Number,
+          default: 0
+        }
+      },
+      earthAndSpace: {
+        answered: {
+          type: Number,
+          default: 0
+        },
+        correct: {
+          type: Number,
+          default: 0
+        }
+      },
+      energy: {
+        answered: {
+          type: Number,
+          default: 0
+        },
+        correct: {
+          type: Number,
+          default: 0
+        }
+      },
+      other: {
+        answered: {
+          type: Number,
+          default: 0
+        },
+        correct: {
+          type: Number,
+          default: 0
+        }
+      },
+      uncategorized: {
+        answered: {
+          type: Number,
+          default: 0
+        },
+        correct: {
+          type: Number,
+          default: 0
+        }
+      }
+    },
+    currentWinStreak: {
+      type: Number,
+      default: 0
+    },
+    longestWinStreak: {
+      type: Number,
+      default: 0
+    },
+    averageResponseTime: {
+      type: Number,
+      default: 0
+    },
+    fastestCorrectAnswer: {
+      type: Number,
+      default: null
+    },
+    aiGamesPlayed: {
+      type: Number,
+      default: 0
+    },
+    aiGamesWon: {
+      type: Number,
+      default: 0
+    }
   },
-  isActive: { type: Boolean, default: true },
-  isVerified: { type: Boolean, default: false },
-  lastLogin: { type: Date },
-  lastActive: { type: Date, default: Date.now },
-  passwordResetToken: { type: String, select: false },
-  passwordResetExpires: { type: Date, select: false },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  lastLogin: {
+    type: Date
+  },
+  lastActive: {
+    type: Date,
+    default: Date.now
+  },
+  passwordResetToken: {
+    type: String,
+    select: false
+  },
+  passwordResetExpires: {
+    type: Date,
+    select: false
+  },
   preferences: {
-    soundEnabled: { type: Boolean, default: true },
-    animationsEnabled: { type: Boolean, default: true },
-    theme: { type: String, enum: ['light', 'dark', 'system'], default: 'system' }
+    soundEnabled: {
+      type: Boolean,
+      default: true
+    },
+    animationsEnabled: {
+      type: Boolean,
+      default: true
+    },
+    theme: {
+      type: String,
+      enum: ['light', 'dark', 'system'],
+      default: 'system'
+    }
   }
 }, {
   timestamps: true
 });
-
-userSchema.index({ rating: -1 });
-userSchema.index({ 'stats.gamesPlayed': -1 });
-userSchema.index({ username: 'text', displayName: 'text' });
-
-// Single combined pre-save hook (password hash + peak rating)
+userSchema.index({
+  rating: -1
+});
+userSchema.index({
+  'stats.gamesPlayed': -1
+});
+userSchema.index({
+  username: 'text',
+  displayName: 'text'
+});
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     const salt = await bcrypt.genSalt(12);
@@ -108,19 +249,17 @@ userSchema.pre('save', async function (next) {
   }
   next();
 });
-
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
-
 userSchema.methods.generateAuthToken = function () {
-  return jwt.sign(
-    { id: this._id, username: this.username },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRE || '7d' }
-  );
+  return jwt.sign({
+    id: this._id,
+    username: this.username
+  }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE || '7d'
+  });
 };
-
 userSchema.methods.getPublicProfile = function () {
   return {
     id: this._id,
@@ -135,17 +274,14 @@ userSchema.methods.getPublicProfile = function () {
     lastActive: this.lastActive
   };
 };
-
 userSchema.virtual('winRate').get(function () {
   if (this.stats.gamesPlayed === 0) return 0;
-  return ((this.stats.gamesWon / this.stats.gamesPlayed) * 100).toFixed(1);
+  return (this.stats.gamesWon / this.stats.gamesPlayed * 100).toFixed(1);
 });
-
 userSchema.virtual('accuracy').get(function () {
   if (this.stats.questionsAnswered === 0) return 0;
-  return ((this.stats.questionsCorrect / this.stats.questionsAnswered) * 100).toFixed(1);
+  return (this.stats.questionsCorrect / this.stats.questionsAnswered * 100).toFixed(1);
 });
-
 userSchema.virtual('rankTitle').get(function () {
   if (this.rating >= 2400) return 'Grandmaster';
   if (this.rating >= 2200) return 'Master';
@@ -156,8 +292,10 @@ userSchema.virtual('rankTitle').get(function () {
   if (this.rating >= 1200) return 'Class D';
   return 'Beginner';
 });
-
-userSchema.set('toJSON', { virtuals: true });
-userSchema.set('toObject', { virtuals: true });
-
+userSchema.set('toJSON', {
+  virtuals: true
+});
+userSchema.set('toObject', {
+  virtuals: true
+});
 module.exports = mongoose.model('User', userSchema);

@@ -6,13 +6,6 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import toast from 'react-hot-toast';
 import styles from './Auth.module.css';
-
-/**
- * Forgot Password page
- *
- * Users submit their email and receive a reset link.
- * The backend always returns a generic success message for security.
- */
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -21,7 +14,6 @@ const ForgotPassword = () => {
   const [resetUrl, setResetUrl] = useState('');
   const [emailSent, setEmailSent] = useState(false);
   const [deliveryReason, setDeliveryReason] = useState('');
-
   const validate = () => {
     if (!email) {
       setError('Email is required');
@@ -34,18 +26,17 @@ const ForgotPassword = () => {
     setError('');
     return true;
   };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (!validate()) return;
-
     setLoading(true);
     try {
-      const response = await authAPI.forgotPassword({ email });
+      const response = await authAPI.forgotPassword({
+        email
+      });
       const maybeResetUrl = response.data?.data?.resetUrl;
       const wasEmailSent = Boolean(response.data?.data?.emailSent);
       const fallbackReason = response.data?.data?.deliveryReason || '';
-
       setSubmitted(true);
       setResetUrl(maybeResetUrl || '');
       setEmailSent(wasEmailSent);
@@ -58,14 +49,12 @@ const ForgotPassword = () => {
       setLoading(false);
     }
   };
-
-  return (
-    <div className={styles.authPage}>
+  return <div className={styles.authPage}>
       <div className={styles.authContainer}>
         <div className={styles.authCard}>
           <Link to="/" className={styles.logo}>
             <span className={styles.logoIcon}>⚗️</span>
-            <span className={styles.logoText}>Science Bowl Online</span>
+            <span className={styles.logoText}>ScienceBowlOne</span>
           </Link>
 
           <h1 className={styles.title}>Forgot Password</h1>
@@ -73,51 +62,26 @@ const ForgotPassword = () => {
             Enter your email and we will send a password reset link.
           </p>
 
-          {!submitted ? (
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <Input
-                label="Email"
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (error) setError('');
-                }}
-                error={error}
-                icon={<FiMail />}
-              />
+          {!submitted ? <form onSubmit={handleSubmit} className={styles.form}>
+              <Input label="Email" type="email" name="email" placeholder="Enter your email" value={email} onChange={e => {
+            setEmail(e.target.value);
+            if (error) setError('');
+          }} error={error} icon={<FiMail />} />
 
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                fullWidth
-                loading={loading}
-                icon={<FiArrowRight />}
-              >
+              <Button type="submit" variant="primary" size="lg" fullWidth loading={loading} icon={<FiArrowRight />}>
+
                 Send Reset Link
               </Button>
-            </form>
-          ) : (
-            <div className={styles.successBox}>
-              {emailSent ? (
-                <>If an account exists for <strong>{email}</strong>, check your inbox for a reset link.</>
-              ) : (
-                <>
+            </form> : <div className={styles.successBox}>
+              {emailSent ? <>If an account exists for <strong>{email}</strong>, check your inbox for a reset link.</> : <>
                   Email delivery is not configured on this server yet.
                   {deliveryReason ? ` (${deliveryReason})` : ''} Use the development reset link below.
-                </>
-              )}
-              {resetUrl && !emailSent && (
-                <div className={styles.devResetLink}>
+                </>}
+              {resetUrl && !emailSent && <div className={styles.devResetLink}>
                   <span>Development link:</span>{' '}
                   <a href={resetUrl}>Open reset page</a>
-                </div>
-              )}
-            </div>
-          )}
+                </div>}
+            </div>}
 
           <p className={styles.switchText}>
             Remembered your password?{' '}
@@ -127,8 +91,6 @@ const ForgotPassword = () => {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ForgotPassword;

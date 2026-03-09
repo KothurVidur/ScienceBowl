@@ -1,12 +1,11 @@
 const protestAdjudicationService = require('./protestAdjudicationService');
-
-/**
- * Wrapper around protest adjudication provider (Gemini by default).
- * Returns a structured decision for score-adjustment negotiation.
- */
 class ProtestNegotiationService {
-  async decide({ questionText, correctAnswer, responses, proposals = [] }) {
-    // No candidate proposal: fallback to basic protest adjudication.
+  async decide({
+    questionText,
+    correctAnswer,
+    responses,
+    proposals = []
+  }) {
     if (!Array.isArray(proposals) || proposals.length === 0) {
       const basic = await protestAdjudicationService.adjudicateProtest({
         questionText,
@@ -20,16 +19,12 @@ class ProtestNegotiationService {
         rationale: basic.rationale || 'No proposals provided.'
       };
     }
-
-    // Default deterministic fallback:
-    // choose the latest proposal if base adjudication accepts, else reject all.
     const basic = await protestAdjudicationService.adjudicateProtest({
       questionText,
       correctAnswer,
       responses,
       protesters: []
     });
-
     if (!basic.accepted) {
       return {
         accepted: false,
@@ -37,7 +32,6 @@ class ProtestNegotiationService {
         rationale: basic.rationale || 'Rejected by fallback adjudication.'
       };
     }
-
     const chosen = proposals[proposals.length - 1];
     return {
       accepted: true,
@@ -49,5 +43,4 @@ class ProtestNegotiationService {
     };
   }
 }
-
 module.exports = new ProtestNegotiationService();

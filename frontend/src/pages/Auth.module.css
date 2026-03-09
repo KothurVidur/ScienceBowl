@@ -129,7 +129,6 @@
   color: var(--primary-300);
 }
 
-/* Decoration */
 .decoration {
   position: absolute;
   top: -60px;
@@ -201,7 +200,6 @@
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Responsive */
 @media (max-width: 480px) {
   .authCard {
     padding: 1.5rem;

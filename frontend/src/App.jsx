@@ -1,10 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useAuth } from './context/AuthContext';
-
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
-
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -21,16 +19,15 @@ import Profile from './pages/Profile';
 import Leaderboard from './pages/Leaderboard';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
-
 function App() {
-  const { loading } = useAuth();
-
+  const {
+    loading
+  } = useAuth();
   if (loading) {
-    return (
-      <div className="loading-screen">
+    return <div className="loading-screen">
         <div className="loading-content">
           <div className="loading-spinner"></div>
-          <p>Loading Science Bowl Online...</p>
+          <p>Loading ScienceBowlOne...</p>
         </div>
         <style>{`
           .loading-screen {
@@ -56,36 +53,30 @@ function App() {
             to { transform: rotate(360deg); }
           }
         `}</style>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: 'var(--bg-secondary)',
-            color: 'var(--text-primary)',
-            border: '1px solid var(--border-color)',
-            borderRadius: 'var(--radius-lg)',
-          },
-          success: {
-            iconTheme: {
-              primary: 'var(--accent-emerald)',
-              secondary: 'var(--text-primary)',
-            },
-          },
-          error: {
-            iconTheme: {
-              primary: 'var(--accent-rose)',
-              secondary: 'var(--text-primary)',
-            },
-          },
-        }}
-      />
+  return <>
+      <Toaster position="top-right" toastOptions={{
+      duration: 4000,
+      style: {
+        background: 'var(--bg-secondary)',
+        color: 'var(--text-primary)',
+        border: '1px solid var(--border-color)',
+        borderRadius: 'var(--radius-lg)'
+      },
+      success: {
+        iconTheme: {
+          primary: 'var(--accent-emerald)',
+          secondary: 'var(--text-primary)'
+        }
+      },
+      error: {
+        iconTheme: {
+          primary: 'var(--accent-rose)',
+          secondary: 'var(--text-primary)'
+        }
+      }
+    }} />
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -108,8 +99,6 @@ function App() {
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
-    </>
-  );
+    </>;
 }
-
 export default App;

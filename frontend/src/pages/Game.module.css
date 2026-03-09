@@ -30,7 +30,6 @@
   font-weight: 700;
 }
 
-/* Loading/Waiting Screens */
 .loadingScreen,
 .waitingScreen,
 .countdownScreen {
@@ -107,7 +106,6 @@
   letter-spacing: 0.1em;
 }
 
-/* Countdown */
 .countdownNumber {
   font-size: 8rem;
   font-weight: 800;
@@ -115,7 +113,6 @@
   text-shadow: 0 0 40px var(--primary-500);
 }
 
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -170,7 +167,6 @@
   font-weight: 600;
 }
 
-/* Main Content */
 .main {
   flex: 1;
   display: flex;
@@ -181,7 +177,6 @@
   position: relative;
 }
 
-/* Question Card */
 .questionCard {
   max-width: 800px;
   width: 100%;
@@ -221,7 +216,6 @@
   margin-bottom: 2rem;
 }
 
-/* Multiple Choice */
 .choicesGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -293,7 +287,6 @@
   border-radius: var(--radius-lg);
 }
 
-/* Short Answer Input */
 .answerInput {
   margin-top: 1rem;
 }
@@ -319,7 +312,6 @@
   color: var(--text-muted);
 }
 
-/* Review Overlay */
 .reviewOverlay {
   position: absolute;
   inset: 0;
@@ -551,7 +543,6 @@
   padding: 0.4rem 0.55rem;
 }
 
-/* Footer */
 .footer {
   display: flex;
   flex-direction: column;
@@ -591,21 +582,21 @@
   font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: 
+  box-shadow:
     0 6px 0 0 #0b87ba,
     0 10px 20px rgba(13, 169, 227, 0.4);
 }
 
 .buzzButton:hover:not(.disabled) {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 8px 0 0 #0b87ba,
     0 14px 24px rgba(13, 169, 227, 0.48);
 }
 
 .buzzButton:active:not(.disabled) {
   transform: translateY(4px);
-  box-shadow: 
+  box-shadow:
     0 2px 0 0 #0b87ba,
     0 4px 12px rgba(13, 169, 227, 0.36);
 }
@@ -633,7 +624,6 @@
   50% { opacity: 0.5; }
 }
 
-/* Result Screen */
 .resultScreen {
   flex: 1;
   display: flex;
@@ -729,7 +719,6 @@
   margin-top: 1rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;

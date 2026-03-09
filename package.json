@@ -1,5 +1,4 @@
 {
-  "dependencies": {
-    "@huggingface/inference": "^4.13.14"
-  }
+  "name": "sciencebowlone",
+  "private": true
 }

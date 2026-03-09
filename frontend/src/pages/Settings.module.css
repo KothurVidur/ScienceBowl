@@ -15,7 +15,6 @@
   gap: 2rem;
 }
 
-/* Tabs */
 .tabs {
   display: flex;
   flex-direction: column;
@@ -47,14 +46,12 @@
   color: white;
 }
 
-/* Content */
 .content h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
 }
 
-/* Form */
 .form {
   display: flex;
   flex-direction: column;
@@ -100,7 +97,6 @@
   color: var(--text-muted);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: 1fr;

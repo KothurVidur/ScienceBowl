@@ -3,14 +3,11 @@ import { FiClock, FiArrowLeft } from 'react-icons/fi';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import styles from './InProgress.module.css';
-
 const InProgress = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const feature = searchParams.get('feature') || 'feature';
-
-  return (
-    <div className={styles.wrapper}>
+  return <div className={styles.wrapper}>
       <Card className={styles.card}>
         <div className={styles.iconWrap}>
           <FiClock size={30} />
@@ -25,8 +22,6 @@ const InProgress = () => {
           </Button>
         </div>
       </Card>
-    </div>
-  );
+    </div>;
 };
-
 export default InProgress;

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const reportedSchema = new mongoose.Schema({
   questionId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -11,5 +10,4 @@ const reportedSchema = new mongoose.Schema({
 }, {
   collection: 'reported'
 });
-
 module.exports = mongoose.model('Reported', reportedSchema);
